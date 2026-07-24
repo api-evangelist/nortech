@@ -1,0 +1,1388 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset Unit API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: Unit
+  description: This API includes endpoints that allow you to interact with `Units` metadata.
+paths:
+  /api/v1/workspaces/{workspace}/assets/{asset}/divisions/{division}/units:
+    get:
+      operationId: v1.metadata.unit.listWorkspaceAssetDivisionUnits
+      summary: List Workspace Asset Division Units
+      description: List all `Units` in a `Workspace/Asset/Division` group by their `Names`.
+      tags:
+      - Unit
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Workspace`'
+          examples:
+          - Workspace 1
+      - name: asset
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Asset`'
+          examples:
+          - Asset 1
+      - name: division
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Division`'
+          examples:
+          - Division 1
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Unit` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Unit`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                      required:
+                      - id
+                      - name
+                      additionalProperties: false
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/workspaces/{workspace}/assets/{asset}/divisions/{division}/units?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Workspace not found
+                  properties:
+                    status:
+                      const: Workspace not found
+                  required:
+                  - status
+                - type: object
+                  description: Asset not found
+                  properties:
+                    status:
+                      const: Asset not found
+                  required:
+                  - status
+                - type: object
+                  description: Division not found
+                  properties:
+                    status:
+                      const: Division not found
+                  required:
+                  - status
+  /api/v1/workspaces/{workspace}/assets/{asset}/divisions/{division}/units/{unit}:
+    get:
+      operationId: v1.metadata.unit.getWorkspaceAssetDivisionUnit
+      summary: Get Workspace Asset Division Unit
+      description: Get a `Unit` in a `Workspace/Asset/Division` group by their `Names`.
+      tags:
+      - Unit
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Workspace`'
+          examples:
+          - Workspace 1
+      - name: asset
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Asset`'
+          examples:
+          - Asset 1
+      - name: division
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Division`'
+          examples:
+          - Division 1
+      - name: unit
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Unit`'
+          examples:
+          - Unit 1
+      responses:
+        '200':
+          description: '`Unit` details'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Unit`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: '`Name` of the `Unit`'
+                    examples:
+                    - Unit 1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Unit`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Unit`'
+                  workspace:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Workspace`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Workspace`'
+                        examples:
+                        - Workspace 1
+                    required:
+                    - id
+                    - name
+                  asset:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Asset`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Asset`'
+                        examples:
+                        - Asset 1
+                    required:
+                    - id
+                    - name
+                  division:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Division`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Division`'
+                        examples:
+                        - Division 1
+                    required:
+                    - id
+                    - name
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - workspace
+                - asset
+                - division
+                additionalProperties: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Workspace not found
+                  properties:
+                    status:
+                      const: Workspace not found
+                  required:
+                  - status
+                - type: object
+                  description: Asset not found
+                  properties:
+                    status:
+                      const: Asset not found
+                  required:
+                  - status
+                - type: object
+                  description: Division not found
+                  properties:
+                    status:
+                      const: Division not found
+                  required:
+                  - status
+                - type: object
+                  description: Unit not found
+                  properties:
+                    status:
+                      const: Unit not found
+                  required:
+                  - status
+  /api/v1/workspaces/{workspace}/units:
+    get:
+      operationId: v1.metadata.unit.listWorkspaceUnits
+      summary: List Workspace Units
+      description: List all `Units` in a `Workspace` by its `ID`.
+      tags:
+      - Unit
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Workspace`'
+          examples:
+          - 10000
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Unit` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Unit`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                      required:
+                      - id
+                      - name
+                      additionalProperties: false
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/workspaces/{workspace}/units?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Workspace not found
+                properties:
+                  status:
+                    const: Workspace not found
+                required:
+                - status
+  /api/v1/assets/{asset}/units:
+    get:
+      operationId: v1.metadata.unit.listAssetUnits
+      summary: List Asset Units
+      description: List all `Units` in an `Asset` by its `ID`.
+      tags:
+      - Unit
+      parameters:
+      - name: asset
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Asset`'
+          examples:
+          - 10000
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Unit` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Unit`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                      required:
+                      - id
+                      - name
+                      additionalProperties: false
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/assets/{asset}/units?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Asset not found
+                properties:
+                  status:
+                    const: Asset not found
+                required:
+                - status
+  /api/v1/divisions/{division}/units:
+    get:
+      operationId: v1.metadata.unit.listDivisionUnits
+      summary: List Division Units
+      description: List all `Units` in a `Division` by its `ID`.
+      tags:
+      - Unit
+      parameters:
+      - name: division
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Division`'
+          examples:
+          - 10000
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Unit` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Unit`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                      required:
+                      - id
+                      - name
+                      additionalProperties: false
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/divisions/{division}/units?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Division not found
+                properties:
+                  status:
+                    const: Division not found
+                required:
+                - status
+  /api/v1/units/{unit}:
+    get:
+      operationId: v1.metadata.unit.getUnit
+      summary: Get Unit
+      description: Get a `Unit` by its `ID`.
+      tags:
+      - Unit
+      parameters:
+      - name: unit
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Unit`'
+          examples:
+          - 10000
+      responses:
+        '200':
+          description: '`Unit` details'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Unit`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: '`Name` of the `Unit`'
+                    examples:
+                    - Unit 1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Unit`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Unit`'
+                  workspace:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Workspace`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Workspace`'
+                        examples:
+                        - Workspace 1
+                    required:
+                    - id
+                    - name
+                  asset:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Asset`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Asset`'
+                        examples:
+                        - Asset 1
+                    required:
+                    - id
+                    - name
+                  division:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Division`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Division`'
+                        examples:
+                        - Division 1
+                    required:
+                    - id
+                    - name
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - workspace
+                - asset
+                - division
+                additionalProperties: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Unit not found
+                properties:
+                  status:
+                    const: Unit not found
+                required:
+                - status
+    put:
+      operationId: v1.metadata.unit.updateUnit
+      summary: Update Unit
+      description: Update a `Unit` **(Requires editor permissions)**
+      tags:
+      - Unit
+      parameters:
+      - name: unit
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Unit`'
+          examples:
+          - 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                asset:
+                  type: string
+                  description: '`Name` of the `Asset`'
+                  examples:
+                  - Asset 1
+                division:
+                  type: string
+                  description: '`Name` of the `Division`'
+                  examples:
+                  - Division 1
+                unit:
+                  type: string
+                  description: '`Name` of the `Unit`'
+                  examples:
+                  - Unit 1
+                createParents:
+                  type: string
+                  default: false
+                  description: Force creation of parent resources if they don't exist
+              required:
+              - asset
+              - division
+              - unit
+      responses:
+        '200':
+          description: '`Unit` updated'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Unit`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: '`Name` of the `Unit`'
+                    examples:
+                    - Unit 1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Unit`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Unit`'
+                  workspace:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Workspace`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Workspace`'
+                        examples:
+                        - Workspace 1
+                    required:
+                    - id
+                    - name
+                  asset:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Asset`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Asset`'
+                        examples:
+                        - Asset 1
+                    required:
+                    - id
+                    - name
+                  division:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Division`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Division`'
+                        examples:
+                        - Division 1
+                    required:
+                    - id
+                    - name
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - workspace
+                - asset
+                - division
+                additionalProperties: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Unit not found
+                  properties:
+                    status:
+                      const: Unit not found
+                  required:
+                  - status
+                - type: object
+                  description: Asset not found
+                  properties:
+                    status:
+                      const: Asset not found
+                  required:
+                  - status
+                - type: object
+                  description: Division not found
+                  properties:
+                    status:
+                      const: Division not found
+                  required:
+                  - status
+  /api/v1/units:
+    post:
+      operationId: v1.metadata.unit.createUnit
+      summary: Create Unit
+      description: Create a new `Unit` **(Requires editor permissions)**
+      tags:
+      - Unit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workspace:
+                  type: string
+                  description: '`Name` of the `Workspace`'
+                  examples:
+                  - Workspace 1
+                asset:
+                  type: string
+                  description: '`Name` of the `Asset`'
+                  examples:
+                  - Asset 1
+                division:
+                  type: string
+                  description: '`Name` of the `Division`'
+                  examples:
+                  - Division 1
+                unit:
+                  type: string
+                  description: '`Name` of the `Unit`'
+                  examples:
+                  - Unit 1
+                createParents:
+                  type: string
+                  default: false
+                  description: Force creation of parent resources if they don't exist
+              required:
+              - workspace
+              - asset
+              - division
+              - unit
+      responses:
+        '200':
+          description: '`Unit` created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Unit`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: '`Name` of the `Unit`'
+                    examples:
+                    - Unit 1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Unit`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Unit`'
+                  workspace:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Workspace`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Workspace`'
+                        examples:
+                        - Workspace 1
+                    required:
+                    - id
+                    - name
+                  asset:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Asset`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Asset`'
+                        examples:
+                        - Asset 1
+                    required:
+                    - id
+                    - name
+                  division:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Division`'
+                        examples:
+                        - 10000
+                      name:
+                        type: string
+                        description: '`Name` of the `Division`'
+                        examples:
+                        - Division 1
+                    required:
+                    - id
+                    - name
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - workspace
+                - asset
+                - division
+                additionalProperties: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Workspace not found
+                  properties:
+                    status:
+                      const: Workspace not found
+                  required:
+                  - status
+                - type: object
+                  description: Asset not found
+                  properties:
+                    status:
+                      const: Asset not found
+                  required:
+                  - status
+                - type: object
+                  description: Division not found
+                  properties:
+                    status:
+                      const: Division not found
+                  required:
+                  - status
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Unit already exists
+                properties:
+                  status:
+                    const: Unit already exists
+                required:
+                - status
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

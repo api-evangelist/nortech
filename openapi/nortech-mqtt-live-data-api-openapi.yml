@@ -1,0 +1,936 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset MQTT Live Data API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: MQTT Live Data
+  description: "\nThis API provides endpoints to configure the Nortech AI Live API by selecting signals to be exported as MQTT messages. Data can then be consumed from `mqtts://live.data.apps.nor.tech` at topics with structure `<format>/workspaces/<workspaceId>/assets/<assetId>/divisions/<divisionId>/units/<unitId>/signals/<signalId>` where `<format>` is one of `json` or `protobuf`. At the moment, the single-level wildcard (+) is not supported.\n\n### Protobuf Schema\n\n```\n  syntax = \"proto3\";\n\n  message DataPoint {\n      uint64 timestamp = 1;\n      oneof value {\n          bool bool_value = 2;\n          double double_value = 3;\n          string string_value = 4;\n      }\n  }\n```\n      "
+paths:
+  /api/v1/live-data/connections:
+    get:
+      operationId: v1.signalData.mqttLiveData.listConnections
+      summary: List Data Connections
+      tags:
+      - MQTT Live Data
+      parameters:
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - name
+          - workspaceId
+          - signals
+          - format
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      - name: workspaceId
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Workspace`'
+          examples:
+          - 10000
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Data Connection`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: Name of the Data Connection
+                        workspaceId:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Workspace`'
+                          examples:
+                          - 10000
+                        brokerUrl:
+                          type: string
+                          format: uri
+                          description: URL of the broker to connect to
+                          examples:
+                          - mqtts://live.data.apps.nor.tech
+                        topics:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              signalId:
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                                description: '`ID` of the `Signal`'
+                                examples:
+                                - 10000
+                              name:
+                                type: string
+                                description: Name of the topic exposing the Signal data
+                            required:
+                            - signalId
+                            - name
+                          description: Array of topics to subscribe to
+                      required:
+                      - id
+                      - name
+                      - workspaceId
+                      - brokerUrl
+                      - topics
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/connections?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+    post:
+      operationId: v1.signalData.mqttLiveData.createConnection
+      summary: Create Data Connection
+      tags:
+      - MQTT Live Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the Data Cnnection
+                workspaceId:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                  description: '`ID` of the `Workspace`'
+                  examples:
+                  - 10000
+                signals:
+                  anyOf:
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        workspace:
+                          type: string
+                          description: '`Name` of the `Workspace`'
+                          examples:
+                          - Workspace 1
+                        asset:
+                          type: string
+                          description: '`Name` of the `Asset`'
+                          examples:
+                          - Asset 1
+                        division:
+                          type: string
+                          description: '`Name` of the `Division`'
+                          examples:
+                          - Division 1
+                        unit:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                        signal:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                      required:
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      - signal
+                      description: Signal search JSON
+                    examples:
+                    - - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal1
+                      - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal2
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Signal`'
+                      examples:
+                      - 10000
+                    description: Array of signal ID's
+                    examples:
+                    - - 10000
+                      - 10001
+                      - 10002
+                  description: Array of Signal ID's or Search JSON's
+                format:
+                  anyOf:
+                  - const: json
+                  - const: protobuf
+                  description: Serialization format of the data
+              required:
+              - name
+              - workspaceId
+              - signals
+              - format
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Data Connection`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the Data Connection
+                  workspaceId:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Workspace`'
+                    examples:
+                    - 10000
+                  brokerUrl:
+                    type: string
+                    format: uri
+                    description: URL of the broker to connect to
+                    examples:
+                    - mqtts://live.data.apps.nor.tech
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        signalId:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: Name of the topic exposing the Signal data
+                      required:
+                      - signalId
+                      - name
+                    description: Array of topics to subscribe to
+                required:
+                - id
+                - name
+                - workspaceId
+                - brokerUrl
+                - topics
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Signals not found
+                properties:
+                  status:
+                    const: Signals not found
+                  details:
+                    type: object
+                    properties:
+                      signals:
+                        anyOf:
+                        - type: array
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              workspace:
+                                type: string
+                                description: '`Name` of the `Workspace`'
+                                examples:
+                                - Workspace 1
+                              asset:
+                                type: string
+                                description: '`Name` of the `Asset`'
+                                examples:
+                                - Asset 1
+                              division:
+                                type: string
+                                description: '`Name` of the `Division`'
+                                examples:
+                                - Division 1
+                              unit:
+                                type: string
+                                description: '`Name` of the `Unit`'
+                                examples:
+                                - Unit 1
+                              signal:
+                                type: string
+                                description: '`Name` of the `Signal`'
+                                examples:
+                                - Signal 1
+                            required:
+                            - workspace
+                            - asset
+                            - division
+                            - unit
+                            - signal
+                            description: Signal search JSON
+                          examples:
+                          - - workspace: Workspace1
+                              asset: Asset1
+                              division: Division1
+                              unit: Unit1
+                              signal: Signal1
+                            - workspace: Workspace1
+                              asset: Asset1
+                              division: Division1
+                              unit: Unit1
+                              signal: Signal2
+                        - type: array
+                          minItems: 1
+                          items:
+                            type: integer
+                            minimum: 1
+                            maximum: 9007199254740991
+                            description: '`ID` of the `Signal`'
+                            examples:
+                            - 10000
+                          description: Array of signal ID's
+                          examples:
+                          - - 10000
+                            - 10001
+                            - 10002
+                        description: Array of Signal ID's or Search JSON's
+                    required:
+                    - signals
+                required:
+                - status
+                - details
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Data Connection already exists
+                properties:
+                  status:
+                    const: Data Connection already exists
+                required:
+                - status
+  /api/v1/live-data/connections/{connectionId}:
+    get:
+      operationId: v1.signalData.mqttLiveData.getConnection
+      summary: Get Data Connection
+      tags:
+      - MQTT Live Data
+      parameters:
+      - name: connectionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Data Connection`'
+          examples:
+          - 10000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Data Connection`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the Data Connection
+                  workspaceId:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Workspace`'
+                    examples:
+                    - 10000
+                  brokerUrl:
+                    type: string
+                    format: uri
+                    description: URL of the broker to connect to
+                    examples:
+                    - mqtts://live.data.apps.nor.tech
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        signalId:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: Name of the topic exposing the Signal data
+                      required:
+                      - signalId
+                      - name
+                    description: Array of topics to subscribe to
+                required:
+                - id
+                - name
+                - workspaceId
+                - brokerUrl
+                - topics
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Data Connection not found
+                properties:
+                  status:
+                    const: Data Connection not found
+                required:
+                - status
+    put:
+      operationId: v1.signalData.mqttLiveData.updateConnection
+      summary: Update Data Connection
+      tags:
+      - MQTT Live Data
+      parameters:
+      - name: connectionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Data Connection`'
+          examples:
+          - 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the Data Cnnection
+                workspaceId:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                  description: '`ID` of the `Workspace`'
+                  examples:
+                  - 10000
+                signals:
+                  anyOf:
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        workspace:
+                          type: string
+                          description: '`Name` of the `Workspace`'
+                          examples:
+                          - Workspace 1
+                        asset:
+                          type: string
+                          description: '`Name` of the `Asset`'
+                          examples:
+                          - Asset 1
+                        division:
+                          type: string
+                          description: '`Name` of the `Division`'
+                          examples:
+                          - Division 1
+                        unit:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                        signal:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                      required:
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      - signal
+                      description: Signal search JSON
+                    examples:
+                    - - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal1
+                      - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal2
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Signal`'
+                      examples:
+                      - 10000
+                    description: Array of signal ID's
+                    examples:
+                    - - 10000
+                      - 10001
+                      - 10002
+                  description: Array of Signal ID's or Search JSON's
+                format:
+                  anyOf:
+                  - const: json
+                  - const: protobuf
+                  description: Serialization format of the data
+              required:
+              - name
+              - workspaceId
+              - signals
+              - format
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Data Connection`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the Data Connection
+                  workspaceId:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Workspace`'
+                    examples:
+                    - 10000
+                  brokerUrl:
+                    type: string
+                    format: uri
+                    description: URL of the broker to connect to
+                    examples:
+                    - mqtts://live.data.apps.nor.tech
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        signalId:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: Name of the topic exposing the Signal data
+                      required:
+                      - signalId
+                      - name
+                    description: Array of topics to subscribe to
+                required:
+                - id
+                - name
+                - workspaceId
+                - brokerUrl
+                - topics
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Signals not found
+                  properties:
+                    status:
+                      const: Signals not found
+                    details:
+                      type: object
+                      properties:
+                        signals:
+                          anyOf:
+                          - type: array
+                            minItems: 1
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              description: Signal search JSON
+                            examples:
+                            - - workspace: Workspace1
+                                asset: Asset1
+                                division: Division1
+                                unit: Unit1
+                                signal: Signal1
+                              - workspace: Workspace1
+                                asset: Asset1
+                                division: Division1
+                                unit: Unit1
+                                signal: Signal2
+                          - type: array
+                            minItems: 1
+                            items:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Signal`'
+                              examples:
+                              - 10000
+                            description: Array of signal ID's
+                            examples:
+                            - - 10000
+                              - 10001
+                              - 10002
+                          description: Array of Signal ID's or Search JSON's
+                      required:
+                      - signals
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Data Connection not found
+                  properties:
+                    status:
+                      const: Data Connection not found
+                  required:
+                  - status
+    delete:
+      operationId: v1.signalData.mqttLiveData.deleteConnection
+      summary: Delete Data Connection
+      tags:
+      - MQTT Live Data
+      parameters:
+      - name: connectionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Data Connection`'
+          examples:
+          - 10000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - {}
+                - not: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Data Connection not found
+                properties:
+                  status:
+                    const: Data Connection not found
+                required:
+                - status
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

@@ -1,0 +1,2817 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset Deriver API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: Deriver
+  description: This API includes endpoints that allow you to create and manage `Derivers`.
+paths:
+  /api/v1/derivers:
+    get:
+      operationId: v1.deriver.listDerivers
+      summary: List Derivers
+      description: List all `Derivers`.
+      tags:
+      - Deriver
+      parameters:
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          - createdAt
+          - updatedAt
+          - definition
+          - description
+          - startAt
+          - status
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Deriver` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Deriver`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: Name of the `Deriver` class definition
+                          examples:
+                          - TestDeriver
+                        definition:
+                          type: string
+                          examples:
+                          - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        startAt: {}
+                        status:
+                          enum:
+                          - STARTING
+                          - RUNNING
+                          - STOPPED
+                          - ERROR
+                          type: string
+                      required:
+                      - id
+                      - name
+                      - definition
+                      - status
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+    post:
+      operationId: v1.deriver.createDeriver
+      summary: Create Deriver
+      description: Create a new `Deriver` **(Requires editor permissions)**
+      tags:
+      - Deriver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                definition:
+                  type: string
+                  examples:
+                  - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                description:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                startAt:
+                  anyOf:
+                  - type: string
+                    format: date-time
+                  - type: 'null'
+                  default: '2026-07-13T22:06:16.121Z'
+                createParents:
+                  type: boolean
+                  default: false
+                  description: Create parent resources if they don't exist
+              required:
+              - definition
+      responses:
+        '201':
+          description: '`Deriver` created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Deriver`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the `Deriver` class definition
+                    examples:
+                    - TestDeriver
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Deriver`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Deriver`'
+                  definition:
+                    type: string
+                    examples:
+                    - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  startAt: {}
+                  inputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  outputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  status:
+                    enum:
+                    - STARTING
+                    - RUNNING
+                    - STOPPED
+                    - ERROR
+                    type: string
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - definition
+                - inputs
+                - outputs
+                - status
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Workspaces not found
+                  properties:
+                    status:
+                      const: Workspaces not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Assets not found
+                  properties:
+                    status:
+                      const: Assets not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Divisions not found
+                  properties:
+                    status:
+                      const: Divisions not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Units not found
+                  properties:
+                    status:
+                      const: Units not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Signals not found
+                  properties:
+                    status:
+                      const: Signals not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Deriver already exists
+                  properties:
+                    status:
+                      const: Deriver already exists
+                  required:
+                  - status
+                - type: object
+                  description: Deriver output already exists
+                  properties:
+                    status:
+                      const: Deriver output already exists
+                    details:
+                      type: object
+                      properties:
+                        outputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              workspace:
+                                type: string
+                                description: '`Name` of the `Workspace`'
+                                examples:
+                                - Workspace 1
+                              asset:
+                                type: string
+                                description: '`Name` of the `Asset`'
+                                examples:
+                                - Asset 1
+                              division:
+                                type: string
+                                description: '`Name` of the `Division`'
+                                examples:
+                                - Division 1
+                              unit:
+                                type: string
+                                description: '`Name` of the `Unit`'
+                                examples:
+                                - Unit 1
+                              signal:
+                                type: string
+                                description: '`Name` of the `Signal`'
+                                examples:
+                                - Signal 1
+                              outputName:
+                                type: string
+                                description: Output name
+                            required:
+                            - workspace
+                            - asset
+                            - division
+                            - unit
+                            - signal
+                            - outputName
+                      required:
+                      - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Input type mismatch
+                  properties:
+                    status:
+                      const: Input type mismatch
+                    details:
+                      type: object
+                      properties:
+                        inputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              inputName:
+                                type: string
+                                description: Input name
+                              receivedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Received data type
+                              expectedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Expected data type
+                            required:
+                            - inputName
+                            - receivedType
+                            - expectedType
+                      required:
+                      - inputs
+                      description: Input type mismatch
+                  required:
+                  - status
+                  - details
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Validation Error
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                    required:
+                    - error
+                required:
+                - status
+                - details
+  /api/v1/derivers/{deriver}:
+    get:
+      operationId: v1.deriver.getDeriver
+      summary: Get Deriver
+      description: Get a `Deriver` by its `Name`.
+      tags:
+      - Deriver
+      parameters:
+      - name: deriver
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Deriver`'
+          examples:
+          - Deriver 1
+      responses:
+        '200':
+          description: '`Deriver` details'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Deriver`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the `Deriver` class definition
+                    examples:
+                    - TestDeriver
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Deriver`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Deriver`'
+                  definition:
+                    type: string
+                    examples:
+                    - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  startAt: {}
+                  inputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  outputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  status:
+                    enum:
+                    - STARTING
+                    - RUNNING
+                    - STOPPED
+                    - ERROR
+                    type: string
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - definition
+                - inputs
+                - outputs
+                - status
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Deriver not found
+                properties:
+                  status:
+                    const: Deriver not found
+                required:
+                - status
+    put:
+      operationId: v1.deriver.updateDeriver
+      summary: Update Deriver
+      description: Update a `Deriver` by its `Name` **(Requires editor permissions)**
+      tags:
+      - Deriver
+      parameters:
+      - name: deriver
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Deriver`'
+          examples:
+          - Deriver 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                definition:
+                  type: string
+                  examples:
+                  - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                description:
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                startAt:
+                  anyOf:
+                  - type: string
+                    format: date-time
+                  - type: 'null'
+                  default: '2026-07-13T22:06:16.121Z'
+                createParents:
+                  type: boolean
+                  default: false
+                  description: Create parent resources if they don't exist
+                keepData:
+                  type: boolean
+                  default: false
+                  description: Keep data for the deriver
+              required:
+              - definition
+      responses:
+        '200':
+          description: '`Deriver` updated'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Deriver`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: Name of the `Deriver` class definition
+                    examples:
+                    - TestDeriver
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Deriver`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Deriver`'
+                  definition:
+                    type: string
+                    examples:
+                    - "\nimport bytewax.operators as op\n\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\n\n\nclass TestDeriver(Deriver):\n    class Inputs(DeriverInputs):\n        input_1: float | None = DeriverInput(\n            workspace=\"workspace1\", asset=\"asset1\", division=\"division1\", unit=\"unit1\", signal=\"signal1\"\n        )\n        input_2: float | None = DeriverInput(\n            workspace=\"workspace2\", asset=\"asset2\", division=\"division2\", unit=\"unit2\", signal=\"signal2\"\n        )\n\n    class Outputs(DeriverOutputs):\n        output_1: float = DeriverOutput(\n            workspace=\"workspace1\",\n            asset=\"asset1\",\n            division=\"division1\",\n            unit=\"unit1\",\n            signal=\"new_signal1\",\n            description=\"output_1\",\n            long_description=\"output_1_long_description\",\n            physical_unit=\"m/s\",\n        )\n        output_2: str = DeriverOutput(\n            workspace=\"workspace2\",\n            asset=\"asset2\",\n            division=\"division2\",\n            unit=\"unit2\",\n            signal=\"new_signal2\",\n            description=\"output_2\",\n            long_description=\"output_2_long_description\",\n            physical_unit=\"m/s\",\n        )\n\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\n        return op.map(\n            \"\",\n            inputs,\n            lambda _input: self.Outputs(\n                timestamp=_input.timestamp,\n                output_1=_input.input_1 or 0,\n                output_2=str(_input.input_2),\n            ),\n        )\n\n"
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  startAt: {}
+                  inputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  outputs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Signal`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        createdAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Creation Date` of the `Signal`'
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          x-native-type: date
+                          description: '`Update Date` of the `Signal`'
+                        physicalUnit:
+                          type: string
+                          description: Physical unit of the `Signal`
+                          examples:
+                          - m/s
+                        dataType:
+                          anyOf:
+                          - const: float
+                          - const: boolean
+                          - const: string
+                          - const: json
+                          description: '`Data type` of the `Signal`'
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Signal`'
+                          examples:
+                          - Signal description
+                        longDescription:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: Long description of the `Signal`
+                          examples:
+                          - Signal description
+                        workspace:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Workspace`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Workspace`'
+                              examples:
+                              - Workspace 1
+                          required:
+                          - id
+                          - name
+                        asset:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Asset`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Asset`'
+                              examples:
+                              - Asset 1
+                          required:
+                          - id
+                          - name
+                        division:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Division`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Division`'
+                              examples:
+                              - Division 1
+                          required:
+                          - id
+                          - name
+                        unit:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Unit`'
+                              examples:
+                              - 10000
+                            name:
+                              type: string
+                              description: '`Name` of the `Unit`'
+                              examples:
+                              - Unit 1
+                          required:
+                          - id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - createdAt
+                      - updatedAt
+                      - physicalUnit
+                      - dataType
+                      - description
+                      - longDescription
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      additionalProperties: false
+                  status:
+                    enum:
+                    - STARTING
+                    - RUNNING
+                    - STOPPED
+                    - ERROR
+                    type: string
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                - definition
+                - inputs
+                - outputs
+                - status
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Deriver not found
+                  properties:
+                    status:
+                      const: Deriver not found
+                  required:
+                  - status
+                - type: object
+                  description: Workspaces not found
+                  properties:
+                    status:
+                      const: Workspaces not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Assets not found
+                  properties:
+                    status:
+                      const: Assets not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Divisions not found
+                  properties:
+                    status:
+                      const: Divisions not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Units not found
+                  properties:
+                    status:
+                      const: Units not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Signals not found
+                  properties:
+                    status:
+                      const: Signals not found
+                    details:
+                      anyOf:
+                      - type: object
+                        properties:
+                          inputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                inputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - inputName
+                        required:
+                        - inputs
+                      - type: object
+                        properties:
+                          outputs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                outputName:
+                                  type: string
+                                  description: Output name
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              - outputName
+                        required:
+                        - outputs
+                  required:
+                  - status
+                  - details
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Deriver already exists
+                  properties:
+                    status:
+                      const: Deriver already exists
+                  required:
+                  - status
+                - type: object
+                  description: Deriver output already exists
+                  properties:
+                    status:
+                      const: Deriver output already exists
+                    details:
+                      type: object
+                      properties:
+                        outputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              workspace:
+                                type: string
+                                description: '`Name` of the `Workspace`'
+                                examples:
+                                - Workspace 1
+                              asset:
+                                type: string
+                                description: '`Name` of the `Asset`'
+                                examples:
+                                - Asset 1
+                              division:
+                                type: string
+                                description: '`Name` of the `Division`'
+                                examples:
+                                - Division 1
+                              unit:
+                                type: string
+                                description: '`Name` of the `Unit`'
+                                examples:
+                                - Unit 1
+                              signal:
+                                type: string
+                                description: '`Name` of the `Signal`'
+                                examples:
+                                - Signal 1
+                              outputName:
+                                type: string
+                                description: Output name
+                            required:
+                            - workspace
+                            - asset
+                            - division
+                            - unit
+                            - signal
+                            - outputName
+                      required:
+                      - outputs
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Input type mismatch
+                  properties:
+                    status:
+                      const: Input type mismatch
+                    details:
+                      type: object
+                      properties:
+                        inputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              inputName:
+                                type: string
+                                description: Input name
+                              receivedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Received data type
+                              expectedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Expected data type
+                            required:
+                            - inputName
+                            - receivedType
+                            - expectedType
+                      required:
+                      - inputs
+                      description: Input type mismatch
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Output type mismatch
+                  properties:
+                    status:
+                      const: Output type mismatch
+                    details:
+                      type: object
+                      properties:
+                        outputs:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              outputName:
+                                type: string
+                                description: Output name
+                              receivedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Received data type
+                              expectedType:
+                                anyOf:
+                                - const: float
+                                - const: boolean
+                                - const: string
+                                - const: json
+                                description: Expected data type
+                            required:
+                            - outputName
+                            - receivedType
+                            - expectedType
+                      required:
+                      - outputs
+                      description: Existing output type mismatch
+                  required:
+                  - status
+                  - details
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Validation Error
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+                    required:
+                    - error
+                required:
+                - status
+                - details
+  /api/v1/derivers/{deriver}/logs:
+    get:
+      operationId: v1.deriver.getDeriverLogs
+      summary: Get Deriver Logs
+      description: Get the logs for a `Deriver` by its `Name`.
+      tags:
+      - Deriver
+      parameters:
+      - name: deriver
+        in: path
+        required: true
+        schema:
+          type: string
+          description: '`Name` of the `Deriver`'
+          examples:
+          - Deriver 1
+      - name: since
+        in: query
+        schema:
+          type: string
+          format: date-time
+        allowEmptyValue: true
+        allowReserved: true
+      - name: until
+        in: query
+        schema:
+          type: string
+          format: date-time
+        allowEmptyValue: true
+        allowReserved: true
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        allowEmptyValue: true
+        allowReserved: true
+      - name: direction
+        in: query
+        schema:
+          enum:
+          - forward
+          - backward
+          type: string
+          default: forward
+        allowEmptyValue: true
+        allowReserved: true
+      - name: level
+        in: query
+        schema:
+          enum:
+          - CRITICAL
+          - FATAL
+          - ERROR
+          - WARN
+          - WARNING
+          - INFO
+          - DEBUG
+          - NOTSET
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Deriver` logs'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    timestamp:
+                      type: string
+                      format: date-time
+                      x-native-type: date
+                  required:
+                  - message
+                  - timestamp
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Deriver not found
+                properties:
+                  status:
+                    const: Deriver not found
+                required:
+                - status
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

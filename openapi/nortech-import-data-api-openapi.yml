@@ -1,0 +1,226 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset Import Data API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: Import Data
+  description: This API includes endpoints that allow you to import signal data.
+paths:
+  /api/v1/signal/data/import:
+    post:
+      operationId: v1.signalData.dataImport.dataImport
+      summary: Import Signal Data
+      description: This endpoint allows you to import signal data into the system. **Requires editor role.**
+      tags:
+      - Import Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                workspace:
+                  type: string
+                  description: '`Name` of the `Workspace`'
+                  examples:
+                  - Workspace 1
+                asset:
+                  type: string
+                  description: '`Name` of the `Asset`'
+                  examples:
+                  - Asset 1
+                division:
+                  type: string
+                  description: '`Name` of the `Division`'
+                  examples:
+                  - Division 1
+                unit:
+                  type: string
+                  description: '`Name` of the `Unit`'
+                  examples:
+                  - Unit 1
+                signals:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: '`Name` of the `Signal`'
+                        examples:
+                        - Signal 1
+                      points:
+                        type: array
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            value:
+                              anyOf:
+                              - anyOf:
+                                - anyOf:
+                                  - type: number
+                                  - type: string
+                                - type: object
+                                  additionalProperties: {}
+                              - type: boolean
+                            timestamp:
+                              anyOf:
+                              - type: number
+                                description: Unix timestamp in milliseconds
+                              - type: string
+                                description: ISO date string
+                              description: ISO date string or Unix timestamp
+                          required:
+                          - value
+                          - timestamp
+                    required:
+                    - name
+                    - points
+              required:
+              - workspace
+              - asset
+              - division
+              - unit
+              - signals
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - {}
+                - not: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Forbidden
+                properties:
+                  status:
+                    const: Forbidden
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Workspace not found
+                  properties:
+                    status:
+                      const: Workspace not found
+                  required:
+                  - status
+                - type: object
+                  description: Asset not found
+                  properties:
+                    status:
+                      const: Asset not found
+                  required:
+                  - status
+                - type: object
+                  description: Division not found
+                  properties:
+                    status:
+                      const: Division not found
+                  required:
+                  - status
+                - type: object
+                  description: Unit not found
+                  properties:
+                    status:
+                      const: Unit not found
+                  required:
+                  - status
+                - type: object
+                  description: Signals not found
+                  properties:
+                    status:
+                      const: Signals not found
+                    details:
+                      type: object
+                      properties:
+                        signals:
+                          type: array
+                          items:
+                            type: string
+                            description: '`Name` of the `Signal`'
+                            examples:
+                            - Signal 1
+                          description: Missing Signals
+                  required:
+                  - status
+                  - details
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

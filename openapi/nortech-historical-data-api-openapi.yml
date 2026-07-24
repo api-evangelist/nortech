@@ -1,0 +1,761 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset Historical Data API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: Historical Data
+  description: "This API includes endpoints that allow you to retrieve raw `Signal` Data for a specified period. \n      The data requested is compiled into a file that you can download posteriorly."
+paths:
+  /api/v1/historical-data/async:
+    post:
+      operationId: v1.signalData.historicalData.asyncRequest
+      summary: Create Async Data Request
+      description: "This endpoint creates a data request and responds immediately while the data is being processed in the background. \n        The response will contain a `status`, indicating if the request is running or if it failed, \n        and a `requestId` field that can be used to check the status of the request using the \n        [Get Data Request](#tag/historicalData/paths/~1api~1v1~1historical-data~1%7BrequestId%7D/get). \n        The field `outputFile` indicates the URL to download the output file, when ready."
+      tags:
+      - Historical Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signals:
+                  anyOf:
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        workspace:
+                          type: string
+                          description: '`Name` of the `Workspace`'
+                          examples:
+                          - Workspace 1
+                        asset:
+                          type: string
+                          description: '`Name` of the `Asset`'
+                          examples:
+                          - Asset 1
+                        division:
+                          type: string
+                          description: '`Name` of the `Division`'
+                          examples:
+                          - Division 1
+                        unit:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                        signal:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        rename:
+                          type: string
+                          maxLength: 127
+                          description: Name to give the returned signal. Defaults to the signal ID.
+                      required:
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      - signal
+                      description: Signal search JSON
+                    examples:
+                    - - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal1
+                      - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal2
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Signal`'
+                      examples:
+                      - 10000
+                    description: Array of signal ID's
+                    examples:
+                    - - 10000
+                      - 10001
+                      - 10002
+                timeWindow:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                      description: Date in ISO format
+                    end:
+                      type: string
+                      description: Date in ISO format
+                  required:
+                  - start
+                format:
+                  anyOf:
+                  - const: parquet
+                  - const: json
+                  - const: csv
+                  default: parquet
+                  description: Output file format
+                notificationUrl:
+                  type: string
+                  format: uri
+                  description: URL to notify when the output file is ready, see [Async historical data request notification](#tag/historicalData/paths/asyncDataRequest/post) for more info
+              required:
+              - signals
+              - timeWindow
+              description: Async Data Request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  properties:
+                    requestId:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Request`'
+                      examples:
+                      - 10000
+                    status:
+                      const: Running
+                    outputFile:
+                      type: string
+                      format: uri
+                      description: URL to download the data output file
+                      examples:
+                      - https://nortech-historical-data-euc1.s3.eu-central-1.amazonaws.com/User-10-1713999600/000.parquet
+                  required:
+                  - requestId
+                  - status
+                  - outputFile
+                  description: Data request is still running
+                - type: object
+                  properties:
+                    requestId:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Request`'
+                      examples:
+                      - 10000
+                    status:
+                      const: Finished
+                    outputFile:
+                      type: string
+                      format: uri
+                      description: URL to download the data output file
+                      examples:
+                      - https://nortech-historical-data-euc1.s3.eu-central-1.amazonaws.com/User-10-1713999600/000.parquet
+                  required:
+                  - requestId
+                  - status
+                  - outputFile
+                  description: Data request is finished
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Signals not found
+                properties:
+                  status:
+                    const: Signals not found
+                  details:
+                    type: object
+                    properties:
+                      signals:
+                        anyOf:
+                        - type: array
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              workspace:
+                                type: string
+                                description: '`Name` of the `Workspace`'
+                                examples:
+                                - Workspace 1
+                              asset:
+                                type: string
+                                description: '`Name` of the `Asset`'
+                                examples:
+                                - Asset 1
+                              division:
+                                type: string
+                                description: '`Name` of the `Division`'
+                                examples:
+                                - Division 1
+                              unit:
+                                type: string
+                                description: '`Name` of the `Unit`'
+                                examples:
+                                - Unit 1
+                              signal:
+                                type: string
+                                description: '`Name` of the `Signal`'
+                                examples:
+                                - Signal 1
+                              rename:
+                                type: string
+                                maxLength: 127
+                                description: Name to give the returned signal. Defaults to the signal ID.
+                            required:
+                            - workspace
+                            - asset
+                            - division
+                            - unit
+                            - signal
+                            description: Signal search JSON
+                          examples:
+                          - - workspace: Workspace1
+                              asset: Asset1
+                              division: Division1
+                              unit: Unit1
+                              signal: Signal1
+                            - workspace: Workspace1
+                              asset: Asset1
+                              division: Division1
+                              unit: Unit1
+                              signal: Signal2
+                        - type: array
+                          minItems: 1
+                          items:
+                            type: integer
+                            minimum: 1
+                            maximum: 9007199254740991
+                            description: '`ID` of the `Signal`'
+                            examples:
+                            - 10000
+                          description: Array of signal ID's
+                          examples:
+                          - - 10000
+                            - 10001
+                            - 10002
+                    required:
+                    - signals
+                required:
+                - status
+                - details
+        '503':
+          description: '503'
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Failed
+                properties:
+                  status:
+                    const: Failed
+                  details:
+                    type: object
+                    properties:
+                      requestId:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Request`'
+                        examples:
+                        - 10000
+                      status:
+                        const: Failed
+                      error:
+                        anyOf:
+                        - const: Data request failed
+                        - const: Request timed out
+                    required:
+                    - requestId
+                    - status
+                    - error
+                    description: Data request failed
+                required:
+                - status
+                - details
+  /api/v1/historical-data/sync:
+    post:
+      operationId: v1.signalData.historicalData.syncRequest
+      summary: Create Sync Data Request
+      description: "This endpoint creates a data request and waits for the data to be processed before responding. \n        The response will contain a `status`, indicating if the request succeeded or if it failed, \n        and a `outputFile` or `error` field indicating the URL of the output file or the error message, respectively."
+      tags:
+      - Historical Data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signals:
+                  anyOf:
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        workspace:
+                          type: string
+                          description: '`Name` of the `Workspace`'
+                          examples:
+                          - Workspace 1
+                        asset:
+                          type: string
+                          description: '`Name` of the `Asset`'
+                          examples:
+                          - Asset 1
+                        division:
+                          type: string
+                          description: '`Name` of the `Division`'
+                          examples:
+                          - Division 1
+                        unit:
+                          type: string
+                          description: '`Name` of the `Unit`'
+                          examples:
+                          - Unit 1
+                        signal:
+                          type: string
+                          description: '`Name` of the `Signal`'
+                          examples:
+                          - Signal 1
+                        rename:
+                          type: string
+                          maxLength: 127
+                          description: Name to give the returned signal. Defaults to the signal ID.
+                      required:
+                      - workspace
+                      - asset
+                      - division
+                      - unit
+                      - signal
+                      description: Signal search JSON
+                    examples:
+                    - - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal1
+                      - workspace: Workspace1
+                        asset: Asset1
+                        division: Division1
+                        unit: Unit1
+                        signal: Signal2
+                  - type: array
+                    minItems: 1
+                    items:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Signal`'
+                      examples:
+                      - 10000
+                    description: Array of signal ID's
+                    examples:
+                    - - 10000
+                      - 10001
+                      - 10002
+                timeWindow:
+                  type: object
+                  properties:
+                    start:
+                      type: string
+                      description: Date in ISO format
+                    end:
+                      type: string
+                      description: Date in ISO format
+                  required:
+                  - start
+                format:
+                  anyOf:
+                  - const: parquet
+                  - const: json
+                  - const: csv
+                  default: parquet
+                  description: Output file format
+              required:
+              - signals
+              - timeWindow
+              description: Sync Data Request
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Request`'
+                    examples:
+                    - 10000
+                  status:
+                    const: Finished
+                  outputFile:
+                    type: string
+                    format: uri
+                    description: URL to download the data output file
+                    examples:
+                    - https://nortech-historical-data-euc1.s3.eu-central-1.amazonaws.com/User-10-1713999600/000.parquet
+                required:
+                - requestId
+                - status
+                - outputFile
+                description: Data request is finished
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  description: Signals not found
+                  properties:
+                    status:
+                      const: Signals not found
+                    details:
+                      type: object
+                      properties:
+                        signals:
+                          anyOf:
+                          - type: array
+                            minItems: 1
+                            items:
+                              type: object
+                              properties:
+                                workspace:
+                                  type: string
+                                  description: '`Name` of the `Workspace`'
+                                  examples:
+                                  - Workspace 1
+                                asset:
+                                  type: string
+                                  description: '`Name` of the `Asset`'
+                                  examples:
+                                  - Asset 1
+                                division:
+                                  type: string
+                                  description: '`Name` of the `Division`'
+                                  examples:
+                                  - Division 1
+                                unit:
+                                  type: string
+                                  description: '`Name` of the `Unit`'
+                                  examples:
+                                  - Unit 1
+                                signal:
+                                  type: string
+                                  description: '`Name` of the `Signal`'
+                                  examples:
+                                  - Signal 1
+                                rename:
+                                  type: string
+                                  maxLength: 127
+                                  description: Name to give the returned signal. Defaults to the signal ID.
+                              required:
+                              - workspace
+                              - asset
+                              - division
+                              - unit
+                              - signal
+                              description: Signal search JSON
+                            examples:
+                            - - workspace: Workspace1
+                                asset: Asset1
+                                division: Division1
+                                unit: Unit1
+                                signal: Signal1
+                              - workspace: Workspace1
+                                asset: Asset1
+                                division: Division1
+                                unit: Unit1
+                                signal: Signal2
+                          - type: array
+                            minItems: 1
+                            items:
+                              type: integer
+                              minimum: 1
+                              maximum: 9007199254740991
+                              description: '`ID` of the `Signal`'
+                              examples:
+                              - 10000
+                            description: Array of signal ID's
+                            examples:
+                            - - 10000
+                              - 10001
+                              - 10002
+                      required:
+                      - signals
+                  required:
+                  - status
+                  - details
+                - type: object
+                  description: Signal Data not found
+                  properties:
+                    status:
+                      const: Signal Data not found
+                  required:
+                  - status
+        '503':
+          description: '503'
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Failed
+                properties:
+                  status:
+                    const: Failed
+                  details:
+                    type: object
+                    properties:
+                      requestId:
+                        type: integer
+                        minimum: 1
+                        maximum: 9007199254740991
+                        description: '`ID` of the `Request`'
+                        examples:
+                        - 10000
+                      error:
+                        anyOf:
+                        - const: Data request failed
+                        - const: Request timed out
+                    required:
+                    - requestId
+                    - error
+                required:
+                - status
+                - details
+  /api/v1/historical-data/{requestId}:
+    get:
+      operationId: v1.signalData.historicalData.getRequest
+      summary: Get Data Request
+      description: This endpoint allows you to check the status of a data request.
+      tags:
+      - Historical Data
+      parameters:
+      - name: requestId
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: '`ID` of the `Request`'
+          examples:
+          - 10000
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  properties:
+                    requestId:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Request`'
+                      examples:
+                      - 10000
+                    status:
+                      const: Running
+                    outputFile:
+                      type: string
+                      format: uri
+                      description: URL to download the data output file
+                      examples:
+                      - https://nortech-historical-data-euc1.s3.eu-central-1.amazonaws.com/User-10-1713999600/000.parquet
+                  required:
+                  - requestId
+                  - status
+                  - outputFile
+                  description: Data request is still running
+                - type: object
+                  properties:
+                    requestId:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Request`'
+                      examples:
+                      - 10000
+                    status:
+                      const: Finished
+                    outputFile:
+                      type: string
+                      format: uri
+                      description: URL to download the data output file
+                      examples:
+                      - https://nortech-historical-data-euc1.s3.eu-central-1.amazonaws.com/User-10-1713999600/000.parquet
+                  required:
+                  - requestId
+                  - status
+                  - outputFile
+                  description: Data request is finished
+                - type: object
+                  properties:
+                    requestId:
+                      type: integer
+                      minimum: 1
+                      maximum: 9007199254740991
+                      description: '`ID` of the `Request`'
+                      examples:
+                      - 10000
+                    status:
+                      const: Failed
+                    error:
+                      anyOf:
+                      - const: Data request failed
+                      - const: Request timed out
+                  required:
+                  - requestId
+                  - status
+                  - error
+                  description: Data request failed
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Request not found
+                properties:
+                  status:
+                    const: Request not found
+                required:
+                - status
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

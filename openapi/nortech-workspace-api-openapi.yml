@@ -1,0 +1,275 @@
+openapi: 3.1.1
+info:
+  title: Nortech Asset Workspace API
+  version: 1.0.0
+  contact:
+    name: Nortech AI
+    url: https://nortech.ai
+    email: support@nortech.ai
+  summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
+  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  x-logo:
+    url: https://branding-api.apps.nor.tech/logo-light
+    backgroundColor: '#fafafa'
+    altText: Nortech AI
+    href: https://nortech.ai
+servers:
+- url: https://api.apps.nor.tech
+  description: HTTP API for Nortech AI
+security:
+- Bearer Token: []
+tags:
+- name: Workspace
+  description: This API includes endpoints that allow you to interact with `Workspaces` metadata.
+paths:
+  /api/v1/workspaces:
+    get:
+      operationId: v1.metadata.workspace.listWorkspaces
+      summary: List Workspaces
+      description: List all `Workspaces` accessible to the user.
+      tags:
+      - Workspace
+      parameters:
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: nextToken
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortBy
+        in: query
+        schema:
+          enum:
+          - id
+          - name
+          - description
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: sortOrder
+        in: query
+        schema:
+          anyOf:
+          - const: asc
+          - const: desc
+          default: asc
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: '`Workspace` list'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  size:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          minimum: 1
+                          maximum: 9007199254740991
+                          description: '`ID` of the `Workspace`'
+                          examples:
+                          - 10000
+                        name:
+                          type: string
+                          description: '`Name` of the `Workspace`'
+                          examples:
+                          - Workspace 1
+                        description:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                          description: '`Description` of the `Workspace`'
+                          examples:
+                          - Workspace description
+                      required:
+                      - id
+                      - name
+                      additionalProperties: false
+                  next:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                      href:
+                        type: string
+                        format: uri
+                        examples:
+                        - https://api.apps.nor.tech/api/v1/workspaces?nextToken=abc
+                    required:
+                    - token
+                    - href
+                required:
+                - size
+                - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+  /api/v1/workspaces/{workspace}:
+    get:
+      operationId: v1.metadata.workspace.getWorkspace
+      summary: Get Workspace
+      description: Get a `Workspace` by its `ID` or `Name`.
+      tags:
+      - Workspace
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 9007199254740991
+            description: '`ID` of the `Workspace`'
+            examples:
+            - 10000
+          - type: string
+            description: '`Name` of the `Workspace`'
+            examples:
+            - Workspace 1
+      responses:
+        '200':
+          description: '`Workspace` details'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    minimum: 1
+                    maximum: 9007199254740991
+                    description: '`ID` of the `Workspace`'
+                    examples:
+                    - 10000
+                  name:
+                    type: string
+                    description: '`Name` of the `Workspace`'
+                    examples:
+                    - Workspace 1
+                  createdAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Creation Date` of the `Workspace`'
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    x-native-type: date
+                    description: '`Update Date` of the `Workspace`'
+                  description:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                    description: '`Description` of the `Workspace`'
+                    examples:
+                    - Workspace description
+                required:
+                - id
+                - name
+                - createdAt
+                - updatedAt
+                additionalProperties: false
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Validation Error
+                  details:
+                    $schema: https://json-schema.org/draft/2020-12/schema
+                    type: string
+                required:
+                - status
+                - details
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    const: Unauthorized
+                required:
+                - status
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Workspace not found
+                properties:
+                  status:
+                    const: Workspace not found
+                required:
+                - status
+components:
+  securitySchemes:
+    Bearer Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-tagGroups:
+- name: Metadata API v1
+  tags:
+  - Workspace
+  - Asset
+  - Division
+  - Unit
+  - Signal
+- name: Signal Data API v1
+  tags:
+  - Historical Data
+  - Live Data
+  - MQTT Live Data
+  - Import Data
+- name: Deriver API v1
+  tags:
+  - Deriver

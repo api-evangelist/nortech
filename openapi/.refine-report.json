@@ -1,0 +1,36 @@
+{
+  "provider": "nortech",
+  "sources": [
+    "nortech-asset-api-openapi.yml",
+    "nortech-deriver-api-openapi.yml",
+    "nortech-division-api-openapi.yml",
+    "nortech-health-api-openapi.yml",
+    "nortech-historical-data-api-openapi.yml",
+    "nortech-import-data-api-openapi.yml",
+    "nortech-live-data-api-openapi.yml",
+    "nortech-me-api-openapi.yml",
+    "nortech-mqtt-live-data-api-openapi.yml",
+    "nortech-signal-api-openapi.yml",
+    "nortech-unit-api-openapi.yml",
+    "nortech-workspace-api-openapi.yml"
+  ],
+  "outputs": [
+    "nortech-asset-api-openapi.yml",
+    "nortech-deriver-api-openapi.yml",
+    "nortech-division-api-openapi.yml",
+    "nortech-health-api-openapi.yml",
+    "nortech-historical-data-api-openapi.yml",
+    "nortech-import-data-api-openapi.yml",
+    "nortech-live-data-api-openapi.yml",
+    "nortech-me-api-openapi.yml",
+    "nortech-mqtt-live-data-api-openapi.yml",
+    "nortech-signal-api-openapi.yml",
+    "nortech-unit-api-openapi.yml",
+    "nortech-workspace-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

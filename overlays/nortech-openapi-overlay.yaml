@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Nortech API
+  version: 1.0.0
+extends: openapi/nortech-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: nortech
+      x-apievangelist-industry: Industrial IoT
+      x-apievangelist-auth: http-bearer-jwt
+      x-apievangelist-pagination: cursor
+      x-apievangelist-streaming: mqtt
+  - target: $.info
+    update:
+      x-apievangelist-domain-model: Workspace > Asset > Division > Unit > Signal; Derivers compute virtual signals

@@ -1,0 +1,27 @@
+# Nortech AI
+
+> Nortech AI provides an end-to-end Industrial IoT and data-infrastructure platform that extracts, structures, and contextualizes real-time data from industrial machinery, equipment, and control systems — regardless of vendor, protocol, or age — for the maritime market and other asset-heavy industries. The Cloud HTTP API exposes a Metadata API (workspaces, assets, divisions, units, signals), a Signal Data API (historical + live queries and import), and a Deriver API (computed virtual signals), plus an MQTT live-data stream.
+
+## APIs
+
+- [Nortech Cloud HTTP API](https://api.apps.nor.tech): REST API, Bearer JWT auth, cursor pagination. Base https://api.apps.nor.tech, all endpoints under /api/v1/.
+- [OpenAPI 3.1 spec](https://api.apps.nor.tech/docs.json): 50 operations across Workspace, Asset, Division, Unit, Signal, Historical Data, Live Data, MQTT Live Data, Import Data, and Deriver.
+- [MQTT Live Data](https://docs.apps.nor.tech/cloud-apis-sdks-mqtt-api): mqtts://live.data.apps.nor.tech, JSON or protobuf DataPoint messages, per-signal topics.
+
+## Docs
+
+- [Developer documentation](https://docs.apps.nor.tech/intro)
+- [HTTP API guide](https://docs.apps.nor.tech/cloud-apis-sdks-http-api)
+- [Domain model](https://docs.apps.nor.tech/intro-get-started-data-extraction)
+- [FAQs](https://nortech.ai/faqs/)
+- [Security & compliance](https://nortech.ai/security/)
+
+## SDKs
+
+- [Python SDK (PyPI: nortech)](https://pypi.org/project/nortech/): official — `pip install nortech`.
+- [nortech-python on GitHub](https://github.com/Nortech-ai/nortech-python)
+
+## Company
+
+- [Nortech AI](https://nortech.ai): Bergen, Norway + Lisbon/Caldas da Rainha, Portugal + Palo Alto, USA.
+- Support / API access: support@nortech.ai

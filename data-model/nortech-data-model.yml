@@ -1,0 +1,68 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nortech-openapi-original.json
+description: >-
+  Nortech's metadata hierarchy models an industrial asset estate. A Workspace is
+  the tenant root; it contains Assets; each Asset is broken into Divisions; each
+  Division into Units; each Unit exposes Signals (the time-series data points).
+  Signal data is queried via Historical Data and Live Data APIs; Derivers compute
+  new virtual Signals from existing ones.
+entities:
+  - name: Workspace
+    id_field: id
+    id_type: integer
+    description: Tenant root that owns all assets and signals.
+  - name: Asset
+    id_field: id
+    id_type: integer
+    description: A physical asset (e.g. a vessel) within a workspace.
+  - name: Division
+    id_field: id
+    id_type: integer
+    description: A logical subdivision of an asset.
+  - name: Unit
+    id_field: id
+    id_type: integer
+    description: A unit of equipment within a division.
+  - name: Signal
+    id_field: id
+    id_type: integer
+    description: A time-series data point emitted by a unit.
+  - name: Deriver
+    id_field: id
+    id_type: integer
+    description: A computation that produces new virtual signals from existing signals.
+  - name: DataConnection
+    id_field: connectionId
+    description: An MQTT live-data connection defining which signals stream and in what format.
+relationships:
+  - from: Workspace
+    to: Asset
+    type: has_many
+    via: workspace
+  - from: Asset
+    to: Division
+    type: has_many
+    via: asset
+  - from: Division
+    to: Unit
+    type: has_many
+    via: division
+  - from: Unit
+    to: Signal
+    type: has_many
+    via: unit
+  - from: Asset
+    belongs_to: Workspace
+    type: belongs_to
+    via: workspace
+  - from: Deriver
+    to: Signal
+    type: has_many
+    via: deriver
+    note: A deriver produces computed signals.
+  - from: DataConnection
+    to: Signal
+    type: has_many
+    via: connectionId
+    note: A live-data connection streams one or more signals.

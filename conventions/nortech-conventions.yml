@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+authentication:
+  style: http-bearer
+  header: 'Authorization: Bearer <JWT>'
+  token_format: JWT
+  provisioning: Request a token from support@nortech.ai
+  cross_ref: authentication/nortech-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter is documented or present in the OpenAPI.
+pagination:
+  style: cursor
+  request_params:
+    size: Page size, max 100 records
+    nextToken: Opaque cursor for the next page
+    sortBy: Field to sort by
+    sortOrder: asc | desc
+    direction: Traversal direction
+  response_fields:
+    size: Number of records returned
+    data: Array of records
+    nextToken: Cursor for the next page (absent on last page)
+  cross_ref: null
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+versioning:
+  style: uri-path
+  current: v1
+  cross_ref: lifecycle/nortech-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{ "status": "<message>" }'
+  cross_ref: errors/nortech-problem-types.yml
+rate_limit_signal:
+  documented: false
+streaming:
+  protocol: MQTT over TLS (MQTTS)
+  broker: mqtts://live.data.apps.nor.tech
+  cross_ref: asyncapi/nortech-live-data-asyncapi.yml

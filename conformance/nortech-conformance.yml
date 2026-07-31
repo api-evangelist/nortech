@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+source: https://nortech.ai/security/
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      OpenAPI declares a single http bearer (JWT) security scheme, not oauth2.
+  - id: bearer-jwt
+    conforms: true
+    evidence: openapi securityScheme "Bearer Token" type http scheme bearer bearerFormat JWT
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses use application/json with a simple {status} envelope,
+      not application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: >-
+      List endpoints return {size, data[], nextToken} and accept size/nextToken/
+      sortBy/sortOrder/direction query params (max page size 100).
+  - id: openapi-3.1
+    conforms: true
+    evidence: openapi 3.1.1 document served at https://api.apps.nor.tech/docs.json
+  - id: mqtt-3.1.1
+    conforms: true
+    evidence: >-
+      Live data streaming over MQTTS at live.data.apps.nor.tech with JSON and
+      protobuf DataPoint messages.
+  # Published compliance / security posture (nortech.ai/security)
+  - id: iso-27001
+    conforms: true
+    evidence: >-
+      "Internal operations are governed by policies aligned with the ISO/IEC
+      27001 framework" (aligned, certification not claimed).
+  - id: iec-62443
+    conforms: true
+    evidence: Industrial automation Component and System Security posture claimed.
+  - id: iacs-ur-e27
+    conforms: true
+    evidence: Marine & offshore vessel cyber-resilience posture claimed.
+  - id: nerc-cip
+    conforms: true
+    evidence: US energy sector CIP-005 / CIP-007 / CIP-013 posture claimed.

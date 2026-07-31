@@ -1,22 +1,303 @@
 aid: nortech
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nortech.png
 name: Nortech
-description: Nortech is a company surfaced as a portfolio company of earlybird and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Nortech AI is an industrial IoT and operational-data infrastructure company
+  (Bergen, Norway and Lisbon, Portugal) serving the maritime market and other
+  asset-heavy industries. Its edge-plus-cloud platform extracts high-frequency
+  data directly from industrial machinery, equipment and control systems —
+  across vendors, protocols and equipment age — and structures it into
+  trustworthy, contextualized signals for data-driven decision-making. The
+  Nortech Cloud API exposes a Metadata API (workspaces, assets, divisions,
+  units, signals), a Signal Data API (historical, live and import) and a
+  Deriver API for computed virtual signals, plus an MQTT live-data stream.
 url: https://raw.githubusercontent.com/api-evangelist/nortech/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - earlybird
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-public-developer-surface
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Industrial IoT
+- IIoT
+- Maritime
+- Operational Data
+- Time Series
+- Sensors
+- Data Infrastructure
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: nortech:nortech-asset-api
+  name: Nortech Asset API
+  description: This API includes endpoints that allow you to interact with `Assets` metadata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-asset-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-deriver-api
+  name: Nortech Deriver API
+  description: This API includes endpoints that allow you to create and manage `Derivers`.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Deriver
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-deriver-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-division-api
+  name: Nortech Division API
+  description: This API includes endpoints that allow you to interact with `Divisions` metadata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Division
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-division-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-health-api
+  name: Nortech Health API
+  description: The Health API from Nortech — 1 operation(s) for health.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-health-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-historical-data-api
+  name: Nortech Historical Data API
+  description: "This API includes endpoints that allow you to retrieve raw `Signal` Data for a specified\
+    \ period. \n      The data requested is compiled into a file that you can download posteriorly."
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Historical Data
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-historical-data-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-import-data-api
+  name: Nortech Import Data API
+  description: This API includes endpoints that allow you to import signal data.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Import Data
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-import-data-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-live-data-api
+  name: Nortech Live Data API
+  description: This API includes endpoints that allow you to retrieve live data.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Live Data
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-live-data-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-me-api
+  name: Nortech Me API
+  description: The Me API from Nortech — 1 operation(s) for me.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Me
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-me-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-mqtt-live-data-api
+  name: Nortech MQTT Live Data API
+  description: >-
+    This API provides endpoints to configure the Nortech AI Live API by selecting signals to be exported
+    as MQTT messages. Data can then be consumed from `mqtts://live.data.apps.nor.tech` at topics with
+    structure `<format>/workspaces/<workspaceId>/assets/<assetId>/divisions/<divisionId>/units/<unitId>/signals/<signalId>`
+    where `<format>` is one of `json` or `protobuf`. At the moment, the single-level wildcard (+) is not
+    supported.
+
+
+    ### Protobuf Schema
+
+
+    ```
+      syntax = "proto3";
+
+      message DataPoint {
+          uint64 timestamp = 1;
+          oneof value {
+              bool bool_value = 2;
+              double double_value = 3;
+              string string_value = 4;
+          }
+      }
+    ```
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - MQTT Live Data
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-mqtt-live-data-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-signal-api
+  name: Nortech Signal API
+  description: This API includes endpoints that allow you to interact with `Signals` metadata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Signal
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-signal-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-unit-api
+  name: Nortech Unit API
+  description: This API includes endpoints that allow you to interact with `Units` metadata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Unit
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-unit-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-workspace-api
+  name: Nortech Workspace API
+  description: This API includes endpoints that allow you to interact with `Workspaces` metadata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - Workspace
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-workspace-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/nortech-live-data-asyncapi.yml
+  - type: Webhooks
+    url: asyncapi/nortech-live-data-asyncapi.yml
+common:
+- type: DeveloperPortal
+  url: https://docs.apps.nor.tech/intro
+- type: Documentation
+  url: https://docs.apps.nor.tech/intro
+- type: APIReference
+  url: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+- type: GettingStarted
+  url: https://docs.apps.nor.tech/intro-get-started-data-extraction
+- type: Website
+  url: https://nortech.ai
+- type: GitHubOrganization
+  url: https://github.com/Nortech-ai
+- type: Support
+  url: https://nortech.ai/contact-us
+- type: TermsOfService
+  url: https://nortech.ai/terms-of-use/
+- type: PrivacyPolicy
+  url: https://nortech.ai/privacy-policy/
+- type: Compliance
+  url: https://nortech.ai/security/
+- type: OpenAPI
+  url: openapi/nortech-openapi-original.json
+- type: Packages
+  url: packages/nortech-packages.yml
+- type: SDKs
+  url: packages/nortech-packages.yml
+- type: Authentication
+  url: authentication/nortech-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/nortech-agentic-access.yml
+- type: DomainSecurity
+  url: security/nortech-domain-security.yml
+- type: MCPServer
+  url: mcp/nortech-mcp.yml
+- type: LLMsTxt
+  url: llms/nortech-llms.txt
+- type: WellKnown
+  url: well-known/nortech-well-known.yml
+- type: Overlay
+  url: overlays/nortech-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/nortech-conformance.yml
+- type: ErrorCatalog
+  url: errors/nortech-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/nortech-lifecycle.yml
+- type: Conventions
+  url: conventions/nortech-conventions.yml
+- type: DataModel
+  url: data-model/nortech-data-model.yml
+- type: AsyncAPI
+  url: asyncapi/nortech-live-data-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/nortech-live-data-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

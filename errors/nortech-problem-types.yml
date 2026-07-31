@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/nortech-openapi-original.json
+format: custom-json
+envelope:
+  media_type: application/json
+  shape: '{ "status": "<message>" }'
+  note: >-
+    Error responses carry a simple JSON object whose "status" property holds the
+    outcome string (e.g. "Unauthorized"). Not RFC 9457 problem+json.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: The request was malformed or failed validation of query/body params.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid Bearer token. Request a token from support@nortech.ai.
+  - status: 403
+    title: Forbidden
+    meaning: Authenticated but not permitted to access the requested resource.
+  - status: 404
+    title: Not Found
+    meaning: The referenced workspace/asset/division/unit/signal/deriver does not exist.
+  - status: 409
+    title: Conflict
+    meaning: The resource already exists or the request conflicts with current state.
+  - status: 422
+    title: Unprocessable Entity
+    meaning: The request body was well-formed but semantically invalid.
+  - status: 503
+    title: Service Unavailable
+    meaning: The service is temporarily unavailable.

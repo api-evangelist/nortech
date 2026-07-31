@@ -1,0 +1,70 @@
+generated: '2026-07-20'
+method: generated
+source: https://docs.apps.nor.tech/cloud-apis-sdks-mqtt-api
+spec_type: AsyncAPI
+note: >-
+  Authored from Nortech's documented MQTT Live Data surface. Nortech does not
+  publish an AsyncAPI document; this faithfully models the documented broker,
+  topic structure, and message formats. A live-data Data Connection must be
+  created via the HTTP API before subscribing.
+asyncapi: 2.6.0
+info:
+  title: Nortech Live Data (MQTT)
+  version: 1.0.0
+  description: >-
+    Real-time signal data streamed over MQTT-over-TLS. Subscribe to per-signal
+    topics after creating a Data Connection through the HTTP API.
+servers:
+  production:
+    url: live.data.apps.nor.tech
+    protocol: mqtts
+    description: MQTT over TLS. Username = your username, password = an API Bearer Token.
+    security:
+      - userPassword: []
+defaultContentType: application/json
+channels:
+  '{dataFormat}/workspaces/{workspaceId}/assets/{assetId}/divisions/{divisionId}/units/{unitId}/signals/{signalId}':
+    description: >-
+      Per-signal live data stream. dataFormat is "json" or "protobuf".
+      Single-level wildcards (+) are not supported.
+    parameters:
+      dataFormat:
+        description: Serialization format of the stream.
+        schema:
+          type: string
+          enum: [json, protobuf]
+      workspaceId: { schema: { type: integer } }
+      assetId: { schema: { type: integer } }
+      divisionId: { schema: { type: integer } }
+      unitId: { schema: { type: integer } }
+      signalId: { schema: { type: integer } }
+    subscribe:
+      operationId: streamSignalData
+      message:
+        $ref: '#/components/messages/DataPoint'
+components:
+  messages:
+    DataPoint:
+      name: DataPoint
+      title: Signal data point
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DataPoint'
+  schemas:
+    DataPoint:
+      type: object
+      description: A single timestamped signal value (bool, double, or string).
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        value:
+          oneOf:
+            - { type: boolean }
+            - { type: number }
+            - { type: string }
+      required: [timestamp, value]
+  securitySchemes:
+    userPassword:
+      type: userPassword
+      description: MQTT username + API Bearer Token as password.

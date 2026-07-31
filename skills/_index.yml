@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/nortech-openapi-original.json
+skills:
+  - file: nortech-read-latest-signal.md
+    name: Read the latest value of an industrial signal
+    api: openapi/nortech-openapi-original.json
+    operations:
+      - v1.metadata.workspace.listWorkspaces
+      - v1.metadata.asset.listWorkspaceAssets
+      - v1.metadata.signal.listWorkspaceSignals
+      - v1.signalData.liveData.getLatestData
+  - file: nortech-query-historical-data.md
+    name: Query historical signal data
+    api: openapi/nortech-openapi-original.json
+    operations:
+      - v1.signalData.historicalData.syncRequest
+      - v1.signalData.historicalData.asyncRequest
+      - v1.signalData.historicalData.getRequest
+  - file: nortech-stream-live-data.md
+    name: Stream live signal data over MQTT
+    api: openapi/nortech-openapi-original.json
+    operations:
+      - v1.signalData.mqttLiveData.createConnection
+      - v1.signalData.mqttLiveData.listConnections
+      - v1.signalData.mqttLiveData.getConnection

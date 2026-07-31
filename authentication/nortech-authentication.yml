@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/nortech-openapi-original.json
+docs: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+notes: >-
+  HTTP Bearer (JWT) authentication. Tokens are provisioned on request from
+  support@nortech.ai. The same Bearer token is used as the MQTT broker password
+  for live-data streaming.
+summary:
+  types:
+  - http
+schemes:
+- name: Bearer Token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/nortech-openapi-original.json

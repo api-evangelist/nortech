@@ -261,7 +261,7 @@ common:
 - type: Compliance
   url: https://nortech.ai/security/
 - type: OpenAPI
-  url: openapi/nortech-openapi-original.json
+  url: openapi/_original/nortech-openapi-original.json
 - type: Packages
   url: packages/nortech-packages.yml
 - type: SDKs

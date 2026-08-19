@@ -1,0 +1,352 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Signal API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workspace Asset Division Unit Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/assets/:asset/divisions/:division/units/:unit/signals",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Signals` in a `Workspace/Asset/Division/Unit` group by their `Names`."
+        },
+        {
+          "info": {
+            "name": "Get Workspace Asset Division Unit Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/assets/:asset/divisions/:division/units/:unit/signals/:signal",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Signal` in a `Workspace/Asset/Division/Unit` group by their `Names`."
+        },
+        {
+          "info": {
+            "name": "List Workspace Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/signals",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Signals` in a `Workspace` by its `IDs`."
+        },
+        {
+          "info": {
+            "name": "List Asset Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/assets/:asset/signals",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Signals` in an `Asset` by its `IDs`."
+        },
+        {
+          "info": {
+            "name": "List Division Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/divisions/:division/signals",
+            "params": [
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Signals` in a `Division` by its `IDs`."
+        },
+        {
+          "info": {
+            "name": "List Unit Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/units/:unit/signals",
+            "params": [
+              {
+                "name": "unit",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Signals` in a `Unit` by its `IDs`."
+        },
+        {
+          "info": {
+            "name": "Get Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/signals/:signal",
+            "params": [
+              {
+                "name": "signal",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Signal` by its `ID`."
+        },
+        {
+          "info": {
+            "name": "Update Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.apps.nor.tech/api/v1/signals/:signal",
+            "params": [
+              {
+                "name": "signal",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `Signal`. **Requires editor role.**"
+        },
+        {
+          "info": {
+            "name": "Get Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/signals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get multiple `Signals` from their `IDs` or `Search JSON`."
+        },
+        {
+          "info": {
+            "name": "Create Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/signals/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a `Signal`. **Requires editor role.**"
+        },
+        {
+          "info": {
+            "name": "Create Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/signals/new/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create multiple `Signals`. The request only succeeds if at least one of the `Signals` is new. **Requires editor role.**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

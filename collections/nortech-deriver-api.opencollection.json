@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Deriver API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deriver",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Derivers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/derivers",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Derivers`."
+        },
+        {
+          "info": {
+            "name": "Create Deriver",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/derivers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new `Deriver` **(Requires editor permissions)**"
+        },
+        {
+          "info": {
+            "name": "Get Deriver",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/derivers/:deriver",
+            "params": [
+              {
+                "name": "deriver",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Deriver` by its `Name`."
+        },
+        {
+          "info": {
+            "name": "Update Deriver",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.apps.nor.tech/api/v1/derivers/:deriver",
+            "params": [
+              {
+                "name": "deriver",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `Deriver` by its `Name` **(Requires editor permissions)**"
+        },
+        {
+          "info": {
+            "name": "Get Deriver Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/derivers/:deriver/logs",
+            "params": [
+              {
+                "name": "deriver",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the logs for a `Deriver` by its `Name`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

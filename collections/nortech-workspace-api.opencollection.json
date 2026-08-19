@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Workspace API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Workspaces` accessible to the user."
+        },
+        {
+          "info": {
+            "name": "Get Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Workspace` by its `ID` or `Name`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

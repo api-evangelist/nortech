@@ -1,0 +1,4052 @@
+{
+  "item": [
+    {
+      "id": "ff619fe8-f594-446c-b3fc-a90fad9a91c4",
+      "name": "Signal",
+      "description": {
+        "content": "This API includes endpoints that allow you to interact with `Signals` metadata.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e65b303-dc57-41e8-b32c-9f4074d73e61",
+          "name": "List Workspace Asset Division Unit Signals",
+          "request": {
+            "name": "List Workspace Asset Division Unit Signals",
+            "description": {
+              "content": "List all `Signals` in a `Workspace/Asset/Division/Unit` group by their `Names`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspaces",
+                ":workspace",
+                "assets",
+                ":asset",
+                "divisions",
+                ":division",
+                "units",
+                ":unit",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "division",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unit",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6058ee42-df22-484a-b709-1b35a012f47d",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 4940453605357636,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://IqXEAgWVvDIxIYTNJVuXamVG.aihowzuFg13o.Rp\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fccddd50-29f3-4808-a62e-2603f8d90e2b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f03e443c-c729-4ea2-9e15-de282374cad5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f3dead-4021-4414-a721-2eb72cf24238",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc98b78b-aa94-4ff3-bcbc-ec88a52b63b8",
+          "name": "Get Workspace Asset Division Unit Signal",
+          "request": {
+            "name": "Get Workspace Asset Division Unit Signal",
+            "description": {
+              "content": "Get a `Signal` in a `Workspace/Asset/Division/Unit` group by their `Names`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspaces",
+                ":workspace",
+                "assets",
+                ":asset",
+                "divisions",
+                ":division",
+                "units",
+                ":unit",
+                "signals",
+                ":signal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "division",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unit",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "signal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69a2ce4c-78c2-4859-863b-1a9433293667",
+              "name": "`Signal` details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"Signal 1\",\n  \"createdAt\": \"2022-11-13T07:14:18.928Z\",\n  \"updatedAt\": \"1992-07-14T09:28:03.913Z\",\n  \"physicalUnit\": \"m/s\",\n  \"dataType\": {},\n  \"description\": \"string\",\n  \"longDescription\": \"string\",\n  \"workspace\": {\n    \"id\": 10000,\n    \"name\": \"Workspace 1\"\n  },\n  \"asset\": {\n    \"id\": 10000,\n    \"name\": \"Asset 1\"\n  },\n  \"division\": {\n    \"id\": 10000,\n    \"name\": \"Division 1\"\n  },\n  \"unit\": {\n    \"id\": 10000,\n    \"name\": \"Unit 1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9be04c52-1e5c-4cd0-896d-f8f3c520450f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbaf1bdf-e690-4d18-9def-733ae6355ad8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4d1d307-af90-4dc9-8131-dcf44369b4ac",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "assets",
+                    ":asset",
+                    "divisions",
+                    ":division",
+                    "units",
+                    ":unit",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "division",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a8f9ced-9e1d-4524-b885-a4acd9ffe7ae",
+          "name": "List Workspace Signals",
+          "request": {
+            "name": "List Workspace Signals",
+            "description": {
+              "content": "List all `Signals` in a `Workspace` by its `IDs`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspaces",
+                ":workspace",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1e35459-251b-43d5-b864-218b1d39cd88",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 6736003789408234,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://SbYXGenlNivmDyMEpbPW.qtvSL6T.d1eFcmb-W.ddYERN+ks-wG+\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4441a071-aabb-49d4-b681-96a553e10c51",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20f6fe85-25e5-4db8-aa13-cf43e5b95538",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0460c27-15dd-467a-aedc-d459bfff511b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8613930f-c177-4bf4-96f6-62be943e6fe5",
+          "name": "List Asset Signals",
+          "request": {
+            "name": "List Asset Signals",
+            "description": {
+              "content": "List all `Signals` in an `Asset` by its `IDs`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "assets",
+                ":asset",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "asset",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adf06e51-9808-4294-9e79-4618dcfb9f39",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assets",
+                    ":asset",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 5451685621741047,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://MwYwSexyjfFedfi.mgeqghxf9ZsHgFlkPmgfkS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0a27244-c8ad-454f-89f4-f814ba53c712",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assets",
+                    ":asset",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2687951-2c0c-4e8b-b990-3c07b45c5865",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assets",
+                    ":asset",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43cc1114-e314-4f54-90a5-4a032a75e4f1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "assets",
+                    ":asset",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "asset",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9a5227a-c4c7-4e20-afb5-8b0dc3b5fd6e",
+          "name": "List Division Signals",
+          "request": {
+            "name": "List Division Signals",
+            "description": {
+              "content": "List all `Signals` in a `Division` by its `IDs`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "divisions",
+                ":division",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "division",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e219940-eb1e-44ea-a6f1-f7310039b917",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "divisions",
+                    ":division",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "division",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 5085588343579557,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://MCmvnOoZxxazSCgDoD.roOGoo0.Test,1cqGyFqVYL4ebpYtNn86OsSlrtGTwCjkdG5nNkkra2\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbc27a0a-0771-4e77-af43-c133bedabefa",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "divisions",
+                    ":division",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "division",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66ce915d-50b1-4e49-9414-1f0140fc46e6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "divisions",
+                    ":division",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "division",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "704f6e74-83c0-4648-83a7-79357375396d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "divisions",
+                    ":division",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "division",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47bd3e18-f5a9-4c83-abcd-3fbe9957c715",
+          "name": "List Unit Signals",
+          "request": {
+            "name": "List Unit Signals",
+            "description": {
+              "content": "List all `Signals` in a `Unit` by its `IDs`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "units",
+                ":unit",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "unit",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c65ada2c-d506-4467-8f60-b38de908c7ec",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 4386152317530336,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://evCmIrXnDjztzaXbcbpBxGCf.unvy9PT4ygwOt7P9SZ1rm9+OTgch\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fb4e2e2-9a8d-4761-a22a-314d81bc016a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6a18a8d-079c-435f-93a5-a22556d89229",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "421012a4-7499-4ac8-94b3-3bec5daedc1e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "units",
+                    ":unit",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "unit",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dca0808-e22a-4699-9565-6da6015aa215",
+          "name": "Get Signal",
+          "request": {
+            "name": "Get Signal",
+            "description": {
+              "content": "Get a `Signal` by its `ID`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                ":signal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "signal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "242b6b89-7add-43d8-9bf9-72e894f21437",
+              "name": "`Signal` details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"Signal 1\",\n  \"createdAt\": \"2022-11-13T07:14:18.928Z\",\n  \"updatedAt\": \"1992-07-14T09:28:03.913Z\",\n  \"physicalUnit\": \"m/s\",\n  \"dataType\": {},\n  \"description\": \"string\",\n  \"longDescription\": \"string\",\n  \"workspace\": {\n    \"id\": 10000,\n    \"name\": \"Workspace 1\"\n  },\n  \"asset\": {\n    \"id\": 10000,\n    \"name\": \"Asset 1\"\n  },\n  \"division\": {\n    \"id\": 10000,\n    \"name\": \"Division 1\"\n  },\n  \"unit\": {\n    \"id\": 10000,\n    \"name\": \"Unit 1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "091aa79f-374e-4b29-8d05-9b475f7637e1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f248ac9f-dac4-4f94-83ec-58a467a3ec26",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "722ffd14-5057-4ece-9574-45a9430b1b5e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92337ce3-0ce8-4d6b-8628-397392e89c86",
+          "name": "Update Signal",
+          "request": {
+            "name": "Update Signal",
+            "description": {
+              "content": "Update a `Signal`. **Requires editor role.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                ":signal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "signal",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset\": \"<string>\",\n  \"division\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"physicalUnit\": \"<string>\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1ddd2b9d-c04a-4022-9720-aad4bf18f9ab",
+              "name": "`Signal` updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"Signal 1\",\n  \"createdAt\": \"2022-11-13T07:14:18.928Z\",\n  \"updatedAt\": \"1992-07-14T09:28:03.913Z\",\n  \"physicalUnit\": \"m/s\",\n  \"dataType\": {},\n  \"description\": \"string\",\n  \"longDescription\": \"string\",\n  \"workspace\": {\n    \"id\": 10000,\n    \"name\": \"Workspace 1\"\n  },\n  \"asset\": {\n    \"id\": 10000,\n    \"name\": \"Asset 1\"\n  },\n  \"division\": {\n    \"id\": 10000,\n    \"name\": \"Division 1\"\n  },\n  \"unit\": {\n    \"id\": 10000,\n    \"name\": \"Unit 1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "802a7629-942d-457d-88ae-04785059b479",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2f462c4-aaec-475d-a3db-c0932e7038b9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b37dcf63-745f-4ce8-9b9d-c8682e1ed4c4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74f12c8a-27a7-4810-a9af-d3936709aac5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    ":signal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "signal",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b506ff2-4f42-44db-a450-e15bfa1fbfe6",
+          "name": "Get Signals",
+          "request": {
+            "name": "Get Signals",
+            "description": {
+              "content": "Get multiple `Signals` from their `IDs` or `Search JSON`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signals\": [\n    {\n      \"workspace\": \"<string>\",\n      \"asset\": \"<string>\",\n      \"division\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"signal\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0f29886-a201-4cee-942c-acc067347335",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal1\"\n    },\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal2\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 10000,\n    \"name\": \"Signal 1\",\n    \"createdAt\": \"1992-03-13T16:32:42.137Z\",\n    \"updatedAt\": \"1965-06-12T04:55:30.541Z\",\n    \"physicalUnit\": \"m/s\",\n    \"dataType\": {},\n    \"description\": \"string\",\n    \"longDescription\": \"string\",\n    \"workspace\": {\n      \"id\": 10000,\n      \"name\": \"Workspace 1\"\n    },\n    \"asset\": {\n      \"id\": 10000,\n      \"name\": \"Asset 1\"\n    },\n    \"division\": {\n      \"id\": 10000,\n      \"name\": \"Division 1\"\n    },\n    \"unit\": {\n      \"id\": 10000,\n      \"name\": \"Unit 1\"\n    }\n  },\n  {\n    \"id\": 10000,\n    \"name\": \"Signal 1\",\n    \"createdAt\": \"2003-11-01T21:33:36.909Z\",\n    \"updatedAt\": \"1997-04-29T04:55:18.143Z\",\n    \"physicalUnit\": \"m/s\",\n    \"dataType\": {},\n    \"description\": \"string\",\n    \"longDescription\": \"string\",\n    \"workspace\": {\n      \"id\": 10000,\n      \"name\": \"Workspace 1\"\n    },\n    \"asset\": {\n      \"id\": 10000,\n      \"name\": \"Asset 1\"\n    },\n    \"division\": {\n      \"id\": 10000,\n      \"name\": \"Division 1\"\n    },\n    \"unit\": {\n      \"id\": 10000,\n      \"name\": \"Unit 1\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "631902fe-d33c-4ae5-be3e-e5a3b6869195",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal1\"\n    },\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal2\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9136c73-10ca-4420-9717-63c1ba619270",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal1\"\n    },\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal2\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13c7a490-fca4-4bd1-a170-6d084cb6d111",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signals\": [\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal1\"\n    },\n    {\n      \"workspace\": \"Workspace1\",\n      \"asset\": \"Asset1\",\n      \"division\": \"Division1\",\n      \"unit\": \"Unit1\",\n      \"signal\": \"Signal2\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": {\n    \"signals\": [\n      {\n        \"workspace\": \"Workspace1\",\n        \"asset\": \"Asset1\",\n        \"division\": \"Division1\",\n        \"unit\": \"Unit1\",\n        \"signal\": \"Signal1\"\n      },\n      {\n        \"workspace\": \"Workspace1\",\n        \"asset\": \"Asset1\",\n        \"division\": \"Division1\",\n        \"unit\": \"Unit1\",\n        \"signal\": \"Signal2\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd46dc2c-d93f-49c5-9527-ee84411397de",
+          "name": "Create Signal",
+          "request": {
+            "name": "Create Signal",
+            "description": {
+              "content": "Create a `Signal`. **Requires editor role.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspace\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"division\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"signal\": \"<string>\",\n  \"dataType\": {},\n  \"physicalUnit\": \"<string>\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6cb750e1-8788-4fbc-954d-266e060636ff",
+              "name": "`Signal` created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"Signal 1\",\n  \"createdAt\": \"2022-11-13T07:14:18.928Z\",\n  \"updatedAt\": \"1992-07-14T09:28:03.913Z\",\n  \"physicalUnit\": \"m/s\",\n  \"dataType\": {},\n  \"description\": \"string\",\n  \"longDescription\": \"string\",\n  \"workspace\": {\n    \"id\": 10000,\n    \"name\": \"Workspace 1\"\n  },\n  \"asset\": {\n    \"id\": 10000,\n    \"name\": \"Asset 1\"\n  },\n  \"division\": {\n    \"id\": 10000,\n    \"name\": \"Division 1\"\n  },\n  \"unit\": {\n    \"id\": 10000,\n    \"name\": \"Unit 1\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a5546a7-5806-4289-9c3e-4ac96cf31c17",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9360cac9-0f62-4675-9a81-0b24ce5de0f1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9cb51d0-b66a-491c-b48c-ced8ed29dfe4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc844b0f-376f-4e56-b3a2-53fd1f6429ce",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13423db4-7ecc-4bfc-a559-9ac934a34977",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4fdaedb-f85e-4584-9340-a0a7120e14dc",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signal\": \"Signal 1\",\n  \"dataType\": {},\n  \"physicalUnit\": \"m/s\",\n  \"description\": \"<string>\",\n  \"longDescription\": \"<string>\",\n  \"groupKey\": \"<string>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "568630c2-8069-42e4-b9df-cef932aa2d13",
+          "name": "Create Signals",
+          "request": {
+            "name": "Create Signals",
+            "description": {
+              "content": "Create multiple `Signals`. The request only succeeds if at least one of the `Signals` is new. **Requires editor role.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "signals",
+                "new",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspace\": \"<string>\",\n  \"asset\": \"<string>\",\n  \"division\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"signals\": [\n    {\n      \"signal\": \"<string>\",\n      \"dataType\": {},\n      \"physicalUnit\": \"<string>\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"<string>\",\n      \"dataType\": {},\n      \"physicalUnit\": \"<string>\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89f1cbb3-89b7-4d67-9159-7c6def400624",
+              "name": "`Signal` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 10000,\n    \"name\": \"Signal 1\",\n    \"createdAt\": \"1992-03-13T16:32:42.137Z\",\n    \"updatedAt\": \"1965-06-12T04:55:30.541Z\",\n    \"physicalUnit\": \"m/s\",\n    \"dataType\": {},\n    \"description\": \"string\",\n    \"longDescription\": \"string\",\n    \"workspace\": {\n      \"id\": 10000,\n      \"name\": \"Workspace 1\"\n    },\n    \"asset\": {\n      \"id\": 10000,\n      \"name\": \"Asset 1\"\n    },\n    \"division\": {\n      \"id\": 10000,\n      \"name\": \"Division 1\"\n    },\n    \"unit\": {\n      \"id\": 10000,\n      \"name\": \"Unit 1\"\n    }\n  },\n  {\n    \"id\": 10000,\n    \"name\": \"Signal 1\",\n    \"createdAt\": \"2003-11-01T21:33:36.909Z\",\n    \"updatedAt\": \"1997-04-29T04:55:18.143Z\",\n    \"physicalUnit\": \"m/s\",\n    \"dataType\": {},\n    \"description\": \"string\",\n    \"longDescription\": \"string\",\n    \"workspace\": {\n      \"id\": 10000,\n      \"name\": \"Workspace 1\"\n    },\n    \"asset\": {\n      \"id\": 10000,\n      \"name\": \"Asset 1\"\n    },\n    \"division\": {\n      \"id\": 10000,\n      \"name\": \"Division 1\"\n    },\n    \"unit\": {\n      \"id\": 10000,\n      \"name\": \"Unit 1\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8fbd68b-caf6-499d-9407-984869f99321",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dbe09e0-4eb0-4fbc-8805-3db2d1ac6086",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f2c16f6-88c5-40d7-a70a-6ef039308c45",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a51adcd-efb2-4401-bd05-28e1a922874c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adf4441b-8ac5-41b4-81a7-867fa10886b5",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "737dd7d1-936f-40c2-811e-9ef6e51dc057",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "signals",
+                    "new",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"workspace\": \"Workspace 1\",\n  \"asset\": \"Asset 1\",\n  \"division\": \"Division 1\",\n  \"unit\": \"Unit 1\",\n  \"signals\": [\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    },\n    {\n      \"signal\": \"Signal 1\",\n      \"dataType\": {},\n      \"physicalUnit\": \"m/s\",\n      \"description\": \"<string>\",\n      \"longDescription\": \"<string>\",\n      \"groupKey\": \"<string>\"\n    }\n  ],\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.apps.nor.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c485846-6282-4dc2-8ca1-6ef441df1284",
+    "name": "Nortech Asset Signal API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order.\n\nContact Support:\n Name: Nortech AI\n Email: support@nortech.ai",
+      "type": "text/plain"
+    }
+  }
+}

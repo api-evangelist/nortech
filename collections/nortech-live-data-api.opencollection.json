@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Live Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Live Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latest data points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/points",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the latest data points for the given signals"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

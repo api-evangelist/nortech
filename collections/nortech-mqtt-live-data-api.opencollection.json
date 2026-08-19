@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset MQTT Live Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MQTT Live Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Data Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/connections",
+            "params": [
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Data Connections"
+        },
+        {
+          "info": {
+            "name": "Create Data Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Data Connection"
+        },
+        {
+          "info": {
+            "name": "Get Data Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Data Connection"
+        },
+        {
+          "info": {
+            "name": "Update Data Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Data Connection"
+        },
+        {
+          "info": {
+            "name": "Delete Data Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.apps.nor.tech/api/v1/live-data/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Data Connection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Division API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Division",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Workspace Asset Divisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/assets/:asset/divisions",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Divisions` in an `Workspace/Asset` group by their `Names`."
+        },
+        {
+          "info": {
+            "name": "Get Workspace Asset Division",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/assets/:asset/divisions/:division",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Division` in an `Workspace/Asset` group by their `Names`."
+        },
+        {
+          "info": {
+            "name": "List Workspace Divisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/workspaces/:workspace/divisions",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Divisions` in a `Workspace` by its `ID`."
+        },
+        {
+          "info": {
+            "name": "List Asset Divisions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/assets/:asset/divisions",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all `Divisions` in an `Asset` by its `ID`."
+        },
+        {
+          "info": {
+            "name": "Get Division",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/divisions/:division",
+            "params": [
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a `Division` by its `ID`."
+        },
+        {
+          "info": {
+            "name": "Update Division",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.apps.nor.tech/api/v1/divisions/:division",
+            "params": [
+              {
+                "name": "division",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a `Division` **(Requires editor permissions)**"
+        },
+        {
+          "info": {
+            "name": "Create Division",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/divisions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new `Division` **(Requires editor permissions)**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

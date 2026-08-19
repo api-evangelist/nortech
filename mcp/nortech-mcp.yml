@@ -2,160 +2,165 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/nortech-openapi-original.json
-note: >-
-  No official hosted MCP server was found. This is a candidate tool list
-  derived one-to-one from the Nortech HTTP API operations; not published by Nortech.
+note: No official hosted MCP server was found. This is a candidate tool list derived one-to-one from the
+  Nortech HTTP API operations; not published by Nortech.
 server:
   name: nortech
   transport: http
 tools:
-  - name: health
-    description: Health check
-    source_operation: openapi/nortech-openapi-original.json#health
-  - name: me
-    description: Get current user
-    source_operation: openapi/nortech-openapi-original.json#me
-  - name: listWorkspaceAssets
-    description: List Workspace Assets
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.listWorkspaceAssets
-  - name: getWorkspaceAsset
-    description: Get Workspace Asset
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.getWorkspaceAsset
-  - name: getAsset
-    description: Get Asset
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.getAsset
-  - name: updateAsset
-    description: Update Asset
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.updateAsset
-  - name: createAsset
-    description: Create Asset
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.createAsset
-  - name: listWorkspaceAssetDivisions
-    description: List Workspace Asset Divisions
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listWorkspaceAssetDivisions
-  - name: getWorkspaceAssetDivision
-    description: Get Workspace Asset Division
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.getWorkspaceAssetDivision
-  - name: listWorkspaceDivisions
-    description: List Workspace Divisions
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listWorkspaceDivisions
-  - name: listAssetDivisions
-    description: List Asset Divisions
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listAssetDivisions
-  - name: getDivision
-    description: Get Division
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.getDivision
-  - name: updateDivision
-    description: Update Division
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.updateDivision
-  - name: createDivision
-    description: Create Division
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.createDivision
-  - name: listWorkspaceAssetDivisionUnitSignals
-    description: List Workspace Asset Division Unit Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listWorkspaceAssetDivisionUnitSignals
-  - name: getWorkspaceAssetDivisionUnitSignal
-    description: Get Workspace Asset Division Unit Signal
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getWorkspaceAssetDivisionUnitSignal
-  - name: listWorkspaceSignals
-    description: List Workspace Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listWorkspaceSignals
-  - name: listAssetSignals
-    description: List Asset Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listAssetSignals
-  - name: listDivisionSignals
-    description: List Division Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listDivisionSignals
-  - name: listUnitSignals
-    description: List Unit Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listUnitSignals
-  - name: getSignal
-    description: Get Signal
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getSignal
-  - name: updateSignal
-    description: Update Signal
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.updateSignal
-  - name: getSignals
-    description: Get Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getSignals
-  - name: createSignal
-    description: Create Signal
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.createSignal
-  - name: createSignals
-    description: Create Signals
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.createSignals
-  - name: listWorkspaceAssetDivisionUnits
-    description: List Workspace Asset Division Units
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listWorkspaceAssetDivisionUnits
-  - name: getWorkspaceAssetDivisionUnit
-    description: Get Workspace Asset Division Unit
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.getWorkspaceAssetDivisionUnit
-  - name: listWorkspaceUnits
-    description: List Workspace Units
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listWorkspaceUnits
-  - name: listAssetUnits
-    description: List Asset Units
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listAssetUnits
-  - name: listDivisionUnits
-    description: List Division Units
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listDivisionUnits
-  - name: getUnit
-    description: Get Unit
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.getUnit
-  - name: updateUnit
-    description: Update Unit
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.updateUnit
-  - name: createUnit
-    description: Create Unit
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.createUnit
-  - name: listWorkspaces
-    description: List Workspaces
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.workspace.listWorkspaces
-  - name: getWorkspace
-    description: Get Workspace
-    source_operation: openapi/nortech-openapi-original.json#v1.metadata.workspace.getWorkspace
-  - name: dataImport
-    description: Import Signal Data
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.dataImport.dataImport
-  - name: asyncRequest
-    description: Create Async Data Request
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.asyncRequest
-  - name: syncRequest
-    description: Create Sync Data Request
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.syncRequest
-  - name: getRequest
-    description: Get Data Request
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.getRequest
-  - name: getLatestData
-    description: Get latest data points
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.liveData.getLatestData
-  - name: listConnections
-    description: List Data Connections
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.listConnections
-  - name: createConnection
-    description: Create Data Connection
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.createConnection
-  - name: getConnection
-    description: Get Data Connection
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.getConnection
-  - name: updateConnection
-    description: Update Data Connection
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.updateConnection
-  - name: deleteConnection
-    description: Delete Data Connection
-    source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.deleteConnection
-  - name: listDerivers
-    description: List Derivers
-    source_operation: openapi/nortech-openapi-original.json#v1.deriver.listDerivers
-  - name: createDeriver
-    description: Create Deriver
-    source_operation: openapi/nortech-openapi-original.json#v1.deriver.createDeriver
-  - name: getDeriver
-    description: Get Deriver
-    source_operation: openapi/nortech-openapi-original.json#v1.deriver.getDeriver
-  - name: updateDeriver
-    description: Update Deriver
-    source_operation: openapi/nortech-openapi-original.json#v1.deriver.updateDeriver
-  - name: getDeriverLogs
-    description: Get Deriver Logs
-    source_operation: openapi/nortech-openapi-original.json#v1.deriver.getDeriverLogs
+- name: health
+  description: Health check
+  source_operation: openapi/nortech-openapi-original.json#health
+- name: me
+  description: Get current user
+  source_operation: openapi/nortech-openapi-original.json#me
+- name: listWorkspaceAssets
+  description: List Workspace Assets
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.listWorkspaceAssets
+- name: getWorkspaceAsset
+  description: Get Workspace Asset
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.getWorkspaceAsset
+- name: getAsset
+  description: Get Asset
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.getAsset
+- name: updateAsset
+  description: Update Asset
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.updateAsset
+- name: createAsset
+  description: Create Asset
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.asset.createAsset
+- name: listWorkspaceAssetDivisions
+  description: List Workspace Asset Divisions
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listWorkspaceAssetDivisions
+- name: getWorkspaceAssetDivision
+  description: Get Workspace Asset Division
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.getWorkspaceAssetDivision
+- name: listWorkspaceDivisions
+  description: List Workspace Divisions
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listWorkspaceDivisions
+- name: listAssetDivisions
+  description: List Asset Divisions
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.listAssetDivisions
+- name: getDivision
+  description: Get Division
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.getDivision
+- name: updateDivision
+  description: Update Division
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.updateDivision
+- name: createDivision
+  description: Create Division
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.division.createDivision
+- name: listWorkspaceAssetDivisionUnitSignals
+  description: List Workspace Asset Division Unit Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listWorkspaceAssetDivisionUnitSignals
+- name: getWorkspaceAssetDivisionUnitSignal
+  description: Get Workspace Asset Division Unit Signal
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getWorkspaceAssetDivisionUnitSignal
+- name: listWorkspaceSignals
+  description: List Workspace Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listWorkspaceSignals
+- name: listAssetSignals
+  description: List Asset Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listAssetSignals
+- name: listDivisionSignals
+  description: List Division Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listDivisionSignals
+- name: listUnitSignals
+  description: List Unit Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.listUnitSignals
+- name: getSignal
+  description: Get Signal
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getSignal
+- name: updateSignal
+  description: Update Signal
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.updateSignal
+- name: getSignals
+  description: Get Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.getSignals
+- name: createSignal
+  description: Create Signal
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.createSignal
+- name: createSignals
+  description: Create Signals
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.signal.createSignals
+- name: listWorkspaceAssetDivisionUnits
+  description: List Workspace Asset Division Units
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listWorkspaceAssetDivisionUnits
+- name: getWorkspaceAssetDivisionUnit
+  description: Get Workspace Asset Division Unit
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.getWorkspaceAssetDivisionUnit
+- name: listWorkspaceUnits
+  description: List Workspace Units
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listWorkspaceUnits
+- name: listAssetUnits
+  description: List Asset Units
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listAssetUnits
+- name: listDivisionUnits
+  description: List Division Units
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.listDivisionUnits
+- name: getUnit
+  description: Get Unit
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.getUnit
+- name: updateUnit
+  description: Update Unit
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.updateUnit
+- name: createUnit
+  description: Create Unit
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.unit.createUnit
+- name: listWorkspaces
+  description: List Workspaces
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.workspace.listWorkspaces
+- name: getWorkspace
+  description: Get Workspace
+  source_operation: openapi/nortech-openapi-original.json#v1.metadata.workspace.getWorkspace
+- name: dataImport
+  description: Import Signal Data
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.dataImport.dataImport
+- name: asyncRequest
+  description: Create Async Data Request
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.asyncRequest
+- name: syncRequest
+  description: Create Sync Data Request
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.syncRequest
+- name: getRequest
+  description: Get Data Request
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.historicalData.getRequest
+- name: getLatestData
+  description: Get latest data points
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.liveData.getLatestData
+- name: listConnections
+  description: List Data Connections
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.listConnections
+- name: createConnection
+  description: Create Data Connection
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.createConnection
+- name: getConnection
+  description: Get Data Connection
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.getConnection
+- name: updateConnection
+  description: Update Data Connection
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.updateConnection
+- name: deleteConnection
+  description: Delete Data Connection
+  source_operation: openapi/nortech-openapi-original.json#v1.signalData.mqttLiveData.deleteConnection
+- name: listDerivers
+  description: List Derivers
+  source_operation: openapi/nortech-openapi-original.json#v1.deriver.listDerivers
+- name: createDeriver
+  description: Create Deriver
+  source_operation: openapi/nortech-openapi-original.json#v1.deriver.createDeriver
+- name: getDeriver
+  description: Get Deriver
+  source_operation: openapi/nortech-openapi-original.json#v1.deriver.getDeriver
+- name: updateDeriver
+  description: Update Deriver
+  source_operation: openapi/nortech-openapi-original.json#v1.deriver.updateDeriver
+- name: getDeriverLogs
+  description: Get Deriver Logs
+  source_operation: openapi/nortech-openapi-original.json#v1.deriver.getDeriverLogs
+deployment:
+  mode: none
+  verified: derived
+  tools: 50
+  checked: '2026-08-12'
+  source: catalog MCP census

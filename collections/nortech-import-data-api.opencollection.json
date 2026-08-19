@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Import Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Import Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Import Signal Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/signal/data/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows you to import signal data into the system. **Requires editor role.**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

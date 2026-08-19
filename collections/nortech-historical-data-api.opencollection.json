@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Nortech Asset Historical Data API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Historical Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Async Data Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/historical-data/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates a data request and responds immediately while the data is being processed in the background. \n        The response will contain a `status`, indicating if the request is running or if it failed, \n        and a `requestId` field that can be used to check the status of the request using the \n        [Get Data Request](#tag/historicalData/paths/~1api~1v1~1historical-data~1%7BrequestId%7D/get). \n        The field `outputFile` indicates the URL to download the output file, when r"
+        },
+        {
+          "info": {
+            "name": "Create Sync Data Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.apps.nor.tech/api/v1/historical-data/sync",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates a data request and waits for the data to be processed before responding. \n        The response will contain a `status`, indicating if the request succeeded or if it failed, \n        and a `outputFile` or `error` field indicating the URL of the output file or the error message, respectively."
+        },
+        {
+          "info": {
+            "name": "Get Data Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.apps.nor.tech/api/v1/historical-data/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to check the status of a data request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

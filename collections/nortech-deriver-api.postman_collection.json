@@ -1,0 +1,1897 @@
+{
+  "item": [
+    {
+      "id": "ce0d45fe-669a-405e-beaf-a38d0b57b3a6",
+      "name": "Deriver",
+      "description": {
+        "content": "This API includes endpoints that allow you to create and manage `Derivers`.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb18a15b-4765-4d8c-85e8-66da4c99ca56",
+          "name": "List Derivers",
+          "request": {
+            "name": "List Derivers",
+            "description": {
+              "content": "List all `Derivers`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "derivers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94555a12-cc1e-436f-9f48-cbafedab4a75",
+              "name": "`Deriver` list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"size\": 2713820584358547,\n  \"data\": [\n    {\n      \"id\": 10000,\n      \"name\": \"TestDeriver\",\n      \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n      \"status\": \"RUNNING\",\n      \"description\": \"string\",\n      \"startAt\": \"\"\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"TestDeriver\",\n      \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n      \"status\": \"RUNNING\",\n      \"description\": \"string\",\n      \"startAt\": \"\"\n    }\n  ],\n  \"next\": {\n    \"token\": \"string\",\n    \"href\": \"https://api.apps.nor.tech/api/v1?nextToken=abc\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1885fa7-85e6-4144-b9e0-5230d75c115c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecd6b907-0ea9-497c-943b-92475cbc24cf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ce02c73-e5f5-4ba4-bd88-da1db8ccbca5",
+          "name": "Create Deriver",
+          "request": {
+            "name": "Create Deriver",
+            "description": {
+              "content": "Create a new `Deriver` **(Requires editor permissions)**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "derivers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"definition\": \"<string>\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a89fd382-2766-43b2-9e42-f624f4610549",
+              "name": "`Deriver` created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"TestDeriver\",\n  \"createdAt\": \"1964-07-06T07:26:26.072Z\",\n  \"updatedAt\": \"2019-08-23T21:36:08.987Z\",\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"inputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1976-03-15T01:10:05.202Z\",\n      \"updatedAt\": \"1991-06-28T02:09:23.552Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1964-11-30T09:48:34.981Z\",\n      \"updatedAt\": \"2001-06-13T12:35:06.399Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"outputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"2017-08-28T21:58:12.277Z\",\n      \"updatedAt\": \"1955-08-26T01:02:14.866Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1979-08-17T00:18:49.135Z\",\n      \"updatedAt\": \"1965-05-25T16:25:31.770Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"status\": \"STOPPED\",\n  \"description\": \"string\",\n  \"startAt\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67d01109-d8cc-4aa8-bfe3-eb97de7a2893",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cede43b-5f37-4067-8291-414cc2eb2ca9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3720929f-b0c8-45ad-bfd2-dda68812a5eb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "779f9e8c-105f-4f7d-92bd-f895d41f07ee",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": {\n    \"inputs\": [\n      {\n        \"workspace\": \"Workspace 1\",\n        \"asset\": \"Asset 1\",\n        \"division\": \"Division 1\",\n        \"unit\": \"Unit 1\",\n        \"signal\": \"Signal 1\",\n        \"inputName\": \"string\"\n      },\n      {\n        \"workspace\": \"Workspace 1\",\n        \"asset\": \"Asset 1\",\n        \"division\": \"Division 1\",\n        \"unit\": \"Unit 1\",\n        \"signal\": \"Signal 1\",\n        \"inputName\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86fda044-1481-4ce5-87d3-623e2d1efe8c",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22a424fd-5050-4c7e-a8a4-164434059a5f",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e77970b-237c-4402-8f28-28196c9c4b21",
+          "name": "Get Deriver",
+          "request": {
+            "name": "Get Deriver",
+            "description": {
+              "content": "Get a `Deriver` by its `Name`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "derivers",
+                ":deriver"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deriver",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef301bdd-379a-4ea4-bc42-dcced895a8c2",
+              "name": "`Deriver` details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"TestDeriver\",\n  \"createdAt\": \"1964-07-06T07:26:26.072Z\",\n  \"updatedAt\": \"2019-08-23T21:36:08.987Z\",\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"inputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1976-03-15T01:10:05.202Z\",\n      \"updatedAt\": \"1991-06-28T02:09:23.552Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1964-11-30T09:48:34.981Z\",\n      \"updatedAt\": \"2001-06-13T12:35:06.399Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"outputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"2017-08-28T21:58:12.277Z\",\n      \"updatedAt\": \"1955-08-26T01:02:14.866Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1979-08-17T00:18:49.135Z\",\n      \"updatedAt\": \"1965-05-25T16:25:31.770Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"status\": \"STOPPED\",\n  \"description\": \"string\",\n  \"startAt\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ace0449e-b7c7-42be-8973-fd49d2b66bfe",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc677c87-828e-4089-aeb7-f7ac187ffec3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d66cc76-e456-4640-ac04-da192a1bdacc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91cfa65b-aabb-4982-bccd-2c2c9440c10b",
+          "name": "Update Deriver",
+          "request": {
+            "name": "Update Deriver",
+            "description": {
+              "content": "Update a `Deriver` by its `Name` **(Requires editor permissions)**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "derivers",
+                ":deriver"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deriver",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"definition\": \"<string>\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eaa7a807-975b-47c5-8330-e10438109d37",
+              "name": "`Deriver` updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10000,\n  \"name\": \"TestDeriver\",\n  \"createdAt\": \"1964-07-06T07:26:26.072Z\",\n  \"updatedAt\": \"2019-08-23T21:36:08.987Z\",\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"inputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1976-03-15T01:10:05.202Z\",\n      \"updatedAt\": \"1991-06-28T02:09:23.552Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1964-11-30T09:48:34.981Z\",\n      \"updatedAt\": \"2001-06-13T12:35:06.399Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"outputs\": [\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"2017-08-28T21:58:12.277Z\",\n      \"updatedAt\": \"1955-08-26T01:02:14.866Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    },\n    {\n      \"id\": 10000,\n      \"name\": \"Signal 1\",\n      \"createdAt\": \"1979-08-17T00:18:49.135Z\",\n      \"updatedAt\": \"1965-05-25T16:25:31.770Z\",\n      \"physicalUnit\": \"m/s\",\n      \"dataType\": {},\n      \"description\": \"string\",\n      \"longDescription\": \"string\",\n      \"workspace\": {\n        \"id\": 10000,\n        \"name\": \"Workspace 1\"\n      },\n      \"asset\": {\n        \"id\": 10000,\n        \"name\": \"Asset 1\"\n      },\n      \"division\": {\n        \"id\": 10000,\n        \"name\": \"Division 1\"\n      },\n      \"unit\": {\n        \"id\": 10000,\n        \"name\": \"Unit 1\"\n      }\n    }\n  ],\n  \"status\": \"STOPPED\",\n  \"description\": \"string\",\n  \"startAt\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a9a4a1b-9a52-4a1c-8790-307d0de80fee",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7988359d-95c1-461c-a068-39358558c7bf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20274d98-5e3e-499a-9dc2-9b61704e4e5b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a64f48ad-c60c-4489-bdf3-6311d41a8104",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3c1bb4f-edf1-4ef9-a793-7d486de69ef1",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f71e42a-560c-4c2f-963a-75061c9236f2",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"definition\": \"\\nimport bytewax.operators as op\\n\\nfrom nortech.derivers import Deriver, DeriverInput, DeriverInputs, DeriverOutput, DeriverOutputs\\n\\n\\nclass TestDeriver(Deriver):\\n    class Inputs(DeriverInputs):\\n        input_1: float | None = DeriverInput(\\n            workspace=\\\"workspace1\\\", asset=\\\"asset1\\\", division=\\\"division1\\\", unit=\\\"unit1\\\", signal=\\\"signal1\\\"\\n        )\\n        input_2: float | None = DeriverInput(\\n            workspace=\\\"workspace2\\\", asset=\\\"asset2\\\", division=\\\"division2\\\", unit=\\\"unit2\\\", signal=\\\"signal2\\\"\\n        )\\n\\n    class Outputs(DeriverOutputs):\\n        output_1: float = DeriverOutput(\\n            workspace=\\\"workspace1\\\",\\n            asset=\\\"asset1\\\",\\n            division=\\\"division1\\\",\\n            unit=\\\"unit1\\\",\\n            signal=\\\"new_signal1\\\",\\n            description=\\\"output_1\\\",\\n            long_description=\\\"output_1_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n        output_2: str = DeriverOutput(\\n            workspace=\\\"workspace2\\\",\\n            asset=\\\"asset2\\\",\\n            division=\\\"division2\\\",\\n            unit=\\\"unit2\\\",\\n            signal=\\\"new_signal2\\\",\\n            description=\\\"output_2\\\",\\n            long_description=\\\"output_2_long_description\\\",\\n            physical_unit=\\\"m/s\\\",\\n        )\\n\\n    def run(self, inputs: op.Stream[Inputs]) -> op.Stream[Outputs]:\\n        return op.map(\\n            \\\"\\\",\\n            inputs,\\n            lambda _input: self.Outputs(\\n                timestamp=_input.timestamp,\\n                output_1=_input.input_1 or 0,\\n                output_2=str(_input.input_2),\\n            ),\\n        )\\n\\n\",\n  \"description\": \"<string>\",\n  \"startAt\": \"<dateTime>\",\n  \"createParents\": false,\n  \"keepData\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": {\n    \"error\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69e0aa68-288f-4256-89da-4b1c47074ba6",
+          "name": "Get Deriver Logs",
+          "request": {
+            "name": "Get Deriver Logs",
+            "description": {
+              "content": "Get the logs for a `Deriver` by its `Name`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "derivers",
+                ":deriver",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "forward"
+                },
+                {
+                  "disabled": false,
+                  "key": "level",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deriver",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc2f6e34-fe9b-4067-9198-bee318f8e68c",
+              "name": "`Deriver` logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "forward"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"message\": \"string\",\n    \"timestamp\": \"1964-08-07T06:36:02.508Z\"\n  },\n  {\n    \"message\": \"string\",\n    \"timestamp\": \"1947-03-01T14:08:32.177Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aff3155-9d07-4ef5-ab1c-b458b4eb72a9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "forward"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {},\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a95dcc7-43a2-4f43-888c-9825a4ec95fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "forward"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6d418a0-2feb-45cb-9f17-9f33c22fcee2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "forward"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a30779bd-685d-4c4e-adc3-6eb13b8404d1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "derivers",
+                    ":deriver",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "forward"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deriver",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.apps.nor.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75e1661f-86ce-4f17-abfe-e92ab618d95e",
+    "name": "Nortech Asset Deriver API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order.\n\nContact Support:\n Name: Nortech AI\n Email: support@nortech.ai",
+      "type": "text/plain"
+    }
+  }
+}

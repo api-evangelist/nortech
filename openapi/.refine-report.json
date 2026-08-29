@@ -1,18 +1,7 @@
 {
   "provider": "nortech",
   "sources": [
-    "nortech-asset-api-openapi.yml",
-    "nortech-deriver-api-openapi.yml",
-    "nortech-division-api-openapi.yml",
-    "nortech-health-api-openapi.yml",
-    "nortech-historical-data-api-openapi.yml",
-    "nortech-import-data-api-openapi.yml",
-    "nortech-live-data-api-openapi.yml",
-    "nortech-me-api-openapi.yml",
-    "nortech-mqtt-live-data-api-openapi.yml",
-    "nortech-signal-api-openapi.yml",
-    "nortech-unit-api-openapi.yml",
-    "nortech-workspace-api-openapi.yml"
+    "_original/nortech-openapi-original.json"
   ],
   "outputs": [
     "nortech-asset-api-openapi.yml",
@@ -22,15 +11,37 @@
     "nortech-historical-data-api-openapi.yml",
     "nortech-import-data-api-openapi.yml",
     "nortech-live-data-api-openapi.yml",
-    "nortech-me-api-openapi.yml",
     "nortech-mqtt-live-data-api-openapi.yml",
+    "nortech-me-api-openapi.yml",
     "nortech-signal-api-openapi.yml",
     "nortech-unit-api-openapi.yml",
-    "nortech-workspace-api-openapi.yml"
+    "nortech-workspace-api-openapi.yml",
+    "nortech-historicaldata-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nortech-openapi-original.json: upgraded openapi 3.1.1 -> OpenAPI 3.2.0; renamed 1 component key(s) illegal in 3.x (e.g. Bearer Token)",
+    "nortech-openapi-original.json: tagged paths GET /api/health -> Health",
+    "nortech-openapi-original.json: tagged paths GET /api/me -> Me",
+    "nortech-openapi-original.json: declared missing tag: Health",
+    "nortech-openapi-original.json: declared missing tag: Me",
+    "nortech-openapi-original.json: declared missing tag: historicalData"
+  ],
+  "skipped": [
+    "nortech-asset-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-deriver-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-division-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-historical-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-import-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-live-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-me-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-mqtt-live-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-signal-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-unit-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "nortech-workspace-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

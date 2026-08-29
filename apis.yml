@@ -251,6 +251,16 @@ apis:
     url: asyncapi/nortech-live-data-asyncapi.yml
   - type: Webhooks
     url: asyncapi/nortech-live-data-asyncapi.yml
+- aid: nortech:nortech-historicaldata-api
+  name: Nortech Historical Data API
+  description: The historicalData API from Nortech — 0 operation(s) for historicaldata.
+  humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
+  baseURL: https://api.apps.nor.tech
+  tags:
+  - historicalData
+  properties:
+  - type: OpenAPI
+    url: openapi/nortech-historicaldata-api-openapi.yml
 common:
 - type: DeveloperPortal
   url: https://docs.apps.nor.tech/intro

@@ -1,6 +1,6 @@
-openapi: 3.1.1
+openapi: 3.2.0
 info:
-  title: Nortech Asset Signal API
+  title: Nortech Signal API
   version: 1.0.0
   contact:
     name: Nortech AI
@@ -3049,7 +3049,7 @@ paths:
                 - status
 components:
   securitySchemes:
-    Bearer Token:
+    Bearer_Token:
       type: http
       scheme: bearer
       bearerFormat: JWT

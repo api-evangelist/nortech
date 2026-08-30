@@ -257,6 +257,8 @@ apis:
   humanURL: https://docs.apps.nor.tech/cloud-apis-sdks-http-api
   baseURL: https://api.apps.nor.tech
   tags:
+  - Historical Data
+  tags_raw:
   - historicalData
   properties:
   - type: OpenAPI

@@ -28,7 +28,8 @@
     "nortech-openapi-original.json: tagged paths GET /api/me -> Me",
     "nortech-openapi-original.json: declared missing tag: Health",
     "nortech-openapi-original.json: declared missing tag: Me",
-    "nortech-openapi-original.json: declared missing tag: historicalData"
+    "nortech-openapi-original.json: declared missing tag: historicalData",
+    "apis.yml register: written (+1 apis, 13 total)"
   ],
   "skipped": [
     "nortech-asset-api-openapi.yml: previously refined output, superseded by openapi/_original/",

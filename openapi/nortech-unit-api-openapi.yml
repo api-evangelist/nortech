@@ -7,7 +7,9 @@ info:
     url: https://nortech.ai
     email: support@nortech.ai
   summary: HTTP API for Nortech AI. Contact Nortech AI support for access.
-  description: "This API is structured between three main API groups:\n* **Metadata API** - To navigate and get information about your assets.\n* **Signal Data API** - To query all signal data produced from your assets.\n* **Deriver API** - To create and manage derivers that produce computed signals.\n\n# Pagination\nAll `List` Endpoints support cursor pagination. In this pagination model, the client receives a `next.token` field in the response, \nwhich can be used as a `nextToken` query parameter to fetch the next page of results. \nThe `size` parameter defines the maximum number of results to return, the `sortBy` and `sortOrder` parameters define the field to sort by and its order."
+  description: 'This API is structured between three main API groups:
+
+    * **Metadata API** - To navigate and get information about your assets.'
   x-logo:
     url: https://branding-api.apps.nor.tech/logo-light
     backgroundColor: '#fafafa'

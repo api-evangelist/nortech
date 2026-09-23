@@ -1,22 +1,23 @@
 generated: '2026-07-20'
 method: searched
 host: https://api.apps.nor.tech
-note: >-
-  All /.well-known/ probes on the API host return 302 redirects (no document
-  served); nortech.ai serves no security.txt. No discovery documents found.
-documents:
+note: All /.well-known/ probes on the API host return 302 redirects (no document served); nortech.ai serves
+  no security.txt. No discovery documents found.
+hosts:
+- host: https://api.apps.nor.tech
+  documents:
   - path: /.well-known/security.txt
-    host: https://api.apps.nor.tech
     status: 302
   - path: /.well-known/openid-configuration
-    host: https://api.apps.nor.tech
     status: 302
   - path: /.well-known/oauth-authorization-server
-    host: https://api.apps.nor.tech
     status: 302
   - path: /.well-known/api-catalog
-    host: https://api.apps.nor.tech
     status: 302
   - path: /.well-known/security.txt
-    host: https://nortech.ai
     status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

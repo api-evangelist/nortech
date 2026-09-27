@@ -49,12 +49,22 @@ modified: '2026-07-20'
 tags:
 - Company
 - Industrial IoT
+- Maritime
+- Operational Data
+- Time Series
+- Sensors
+- Data Infrastructure
+- Real-Time
+tags_raw:
+- Company
+- Industrial IoT
 - IIoT
 - Maritime
 - Operational Data
 - Time Series
 - Sensors
 - Data Infrastructure
+- Real-Time
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

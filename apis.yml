@@ -45,7 +45,7 @@ x-tier: profiled
 x-tier-reason: enriched-from-public-developer-surface
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-10-06'
 tags:
 - Company
 - Industrial IoT
@@ -263,6 +263,8 @@ apis:
   - type: Webhooks
     url: asyncapi/nortech-live-data-asyncapi.yml
 common:
+- url: https://nortech.ai/articles/
+  type: Blog
 - type: DeveloperPortal
   url: https://docs.apps.nor.tech/intro
 - type: Documentation

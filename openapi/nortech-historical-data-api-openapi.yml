@@ -843,3 +843,9 @@ webhooks:
       responses:
         '200':
           description: Success
+x-provenance:
+  method: harvested
+  publisher: Nortech
+  source: https://api.apps.nor.tech/docs.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

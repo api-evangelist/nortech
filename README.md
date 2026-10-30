@@ -64,6 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Nortech is a company surfaced as a portfolio company of earlybird and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Nortech AI is an industrial IoT and operational-data infrastructure company (Bergen, Norway and Lisbon, Portugal) serving the maritime market and other asset-heavy industries. Its edge-plus-cloud platform extracts high-frequency data directly from industrial machinery, equipment and control systems — across vendors, protocols and equipment age — and structures it into trustworthy, contextualized signals for data-driven decision-making. The Nortech Cloud API exposes a Metadata API (workspaces, assets, divisions, units, signals), a Signal Data API (historical, live and import) and a Deriver API for computed virtual signals, plus an MQTT live-data stream.
 
-Backed by: earlybird
+**Areas:** Company · Industrial IoT · Maritime · Operational Data · Time Series · Sensors · Data Infrastructure · Real-Time
+
+## Nortech on APIs.io
+
+Everything profiled for Nortech is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nortech/](https://apis.io/providers/nortech/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [Nortech Asset API](https://apis.io/apis/nortech/nortech-asset-api/) — This API includes endpoints that allow you to interact with `Assets` metadata.
+- [Nortech Deriver API](https://apis.io/apis/nortech/nortech-deriver-api/) — This API includes endpoints that allow you to create and manage `Derivers`.
+- [Nortech Division API](https://apis.io/apis/nortech/nortech-division-api/) — This API includes endpoints that allow you to interact with `Divisions` metadata.
+- [Nortech Health API](https://apis.io/apis/nortech/nortech-health-api/) — The Health API from Nortech — 1 operation(s) for health.
+- [Nortech Historical Data API](https://apis.io/apis/nortech/nortech-historical-data-api/) — This API includes endpoints that allow you to retrieve raw `Signal` Data for a specified period. The data requested is compiled into a file that you can…
+- [Nortech Import Data API](https://apis.io/apis/nortech/nortech-import-data-api/) — This API includes endpoints that allow you to import signal data.
+- [Nortech Live Data API](https://apis.io/apis/nortech/nortech-live-data-api/) — This API includes endpoints that allow you to retrieve live data.
+- [Nortech Me API](https://apis.io/apis/nortech/nortech-me-api/) — The Me API from Nortech — 1 operation(s) for me.
+- [Nortech MQTT Live Data API](https://apis.io/apis/nortech/nortech-mqtt-live-data-api/) — This API provides endpoints to configure the Nortech AI Live API by selecting signals to be exported as MQTT messages. Data can then be consumed from…
+- [Nortech Signal API](https://apis.io/apis/nortech/nortech-signal-api/) — This API includes endpoints that allow you to interact with `Signals` metadata.
+- [Nortech Unit API](https://apis.io/apis/nortech/nortech-unit-api/) — This API includes endpoints that allow you to interact with `Units` metadata.
+- [Nortech Workspace API](https://apis.io/apis/nortech/nortech-workspace-api/) — This API includes endpoints that allow you to interact with `Workspaces` metadata.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Nortech Live Data (MQTT)](https://apis.io/asyncapis/nortech/nortech-live-data-asyncapi/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [{dataFormat}/workspaces/{workspaceId}/assets/{assetId}/divisions/{divisionId}/units/{unitId}/signals/{signalId}](https://apis.io/channels/nortech/dataformat-workspaces-workspaceid-assets-assetid-divisions-divisionid-units-unit/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [nortech](https://apis.io/servers/nortech/nortech/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Nortech Agentic Access](https://apis.io/agentic-access/nortech/nortech-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Nortech Asset API](https://apis.io/collections/nortech/open-nortech-asset-api/)
+- [Nortech Asset Deriver API](https://apis.io/collections/nortech/open-nortech-deriver-api/)
+- [Nortech Asset Division API](https://apis.io/collections/nortech/open-nortech-division-api/)
+- [Nortech Asset Health API](https://apis.io/collections/nortech/open-nortech-health-api/)
+- [Nortech Asset Historical Data API](https://apis.io/collections/nortech/open-nortech-historical-data-api/)
+- [Nortech Asset Import Data API](https://apis.io/collections/nortech/open-nortech-import-data-api/)
+- [Nortech Asset Live Data API](https://apis.io/collections/nortech/open-nortech-live-data-api/)
+- [Nortech Asset Me API](https://apis.io/collections/nortech/open-nortech-me-api/)
+- [Nortech Asset MQTT Live Data API](https://apis.io/collections/nortech/open-nortech-mqtt-live-data-api/)
+- [Nortech Asset Signal API](https://apis.io/collections/nortech/open-nortech-signal-api/)
+- [Nortech Asset Unit API](https://apis.io/collections/nortech/open-nortech-unit-api/)
+- [Nortech Asset Workspace API](https://apis.io/collections/nortech/open-nortech-workspace-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Nortech Openapi Overlay](https://apis.io/overlays/nortech/nortech-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nortech Authentication](https://apis.io/security/nortech/nortech-authentication/)
+- [Nortech Domain Security](https://apis.io/security/nortech/nortech-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://nortech.ai)
+- [Documentation](https://docs.apps.nor.tech/intro)
+- [Getting started](https://docs.apps.nor.tech/intro-get-started-data-extraction)
+- [API reference](https://docs.apps.nor.tech/cloud-apis-sdks-http-api)
+- [Support](https://nortech.ai/contact-us)
+- [Blog](https://nortech.ai/articles/)
+- [Compliance](https://nortech.ai/security/)
+- [Terms of service](https://nortech.ai/terms-of-use/)
+- [Privacy policy](https://nortech.ai/privacy-policy/)
+- [GitHub](https://github.com/Nortech-ai)
+
+## API Evangelist rating
+
+**Kin Score 45.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 60.8 |
+| Contract governance | 18.2 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 28.9 |
+
+**Agent readiness 29.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nortech/](https://apis.io/providers/nortech/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nortech: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nortech/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
